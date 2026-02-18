@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ANIMATCH | あなたのJECCA動物タイプ診断</title>
+
+  <!-- OGP -->
+  <meta property="og:title" content="ANIMATCH - あなたのJECCA動物タイプ診断">
+  <meta property="og:description" content="8問に答えて、あなたの動物タイプを診断！16タイプの中からあなたにぴったりの動物を見つけよう。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://jekca-shop.com/cdn/shop/files/JEKCA_Logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ANIMATCH - JECCA動物タイプ診断">
+  <meta name="twitter:description" content="8問に答えて、あなたのJECCA動物タイプを診断！あなたは何タイプ？">
+
+  <style>
+    /* ===== デザインシステム ===== */
+    :root {
+      --black: #121212;
+      --white: #ffffff;
+      --gray-900: #1a1a1a;
+      --gray-700: #404040;
+      --gray-500: #606060;
+      --gray-300: #a0a0a0;
+      --gray-200: #dddddd;
+      --gray-100: #f0f0f0;
+      --bg: #fafafa;
+      --accent: #121212;
+
+      --r-sm: 8px;
+      --r-md: 12px;
+      --r-lg: 20px;
+      --r-full: 9999px;
+
+      --shadow-sm: 0 1px 4px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.16);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', 'Yu Gothic', sans-serif;
+      background: var(--bg);
+      color: var(--black);
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== スクリーン管理 ===== */
+    .screen {
+      display: none;
+      min-height: 100vh;
+      flex-direction: column;
+      animation: fadeIn 0.3s ease;
+    }
+    .screen.active { display: flex; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== コンテナ ===== */
+    .container {
+      max-width: 440px;
+      margin: 0 auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+
+    /* ===== タイポグラフィ ===== */
+    .text-xs  { font-size: 11px; }
+    .text-sm  { font-size: 13px; }
+    .text-base{ font-size: 15px; }
+    .text-lg  { font-size: 18px; }
+    .text-xl  { font-size: 22px; }
+    .text-2xl { font-size: 28px; }
+    .text-3xl { font-size: 36px; }
+    .fw-bold   { font-weight: 700; }
+    .fw-medium { font-weight: 500; }
+    .text-center { text-align: center; }
+    .text-muted { color: var(--gray-500); }
+    .lh-relaxed { line-height: 1.75; }
+
+    /* ===== ユーティリティ ===== */
+    .mt-1 { margin-top: 4px; }
+    .mt-2 { margin-top: 8px; }
+    .mt-3 { margin-top: 12px; }
+    .mt-4 { margin-top: 16px; }
+    .mt-5 { margin-top: 20px; }
+    .mt-6 { margin-top: 24px; }
+    .mt-8 { margin-top: 32px; }
+    .mt-10{ margin-top: 40px; }
+    .mt-12{ margin-top: 48px; }
+    .mb-2 { margin-bottom: 8px; }
+    .mb-4 { margin-bottom: 16px; }
+    .mb-6 { margin-bottom: 24px; }
+    .py-2 { padding-top: 8px; padding-bottom: 8px; }
+    .py-3 { padding-top: 12px; padding-bottom: 12px; }
+    .py-4 { padding-top: 16px; padding-bottom: 16px; }
+
+    /* ===== ボタン ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border: none;
+      border-radius: var(--r-full);
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      padding: 16px 32px;
+      transition: all 0.18s ease;
+      text-decoration: none;
+      width: 100%;
+    }
+    .btn-primary {
+      background: var(--black);
+      color: var(--white);
+    }
+    .btn-primary:active { background: var(--gray-900); transform: scale(0.98); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--black);
+      border: 1.5px solid var(--gray-200);
+    }
+    .btn-outline:active { background: var(--gray-100); }
+
+    .btn-accent {
+      background: var(--accent);
+      color: var(--white);
+    }
+
+    .btn-sm {
+      font-size: 13px;
+      padding: 10px 20px;
+    }
+
+    /* ===== =============================== ===== */
+    /* ===== TOP SCREEN                      ===== */
+    /* ===== =============================== ===== */
+
+    #screen-top {
+      background: var(--white);
+    }
+
+    .top-hero {
+      background: var(--black);
+      color: var(--white);
+      padding: 60px 20px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .top-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 60%, rgba(255,255,255,0.04) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 20%, rgba(255,255,255,0.03) 0%, transparent 50%);
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--r-full);
+      padding: 5px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 24px;
+    }
+
+    .top-headline {
+      font-size: clamp(28px, 8vw, 38px);
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      position: relative;
+    }
+
+    .top-subline {
+      font-size: 15px;
+      color: rgba(255,255,255,0.65);
+      margin-top: 12px;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    .animal-icons-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 28px;
+      font-size: 28px;
+      filter: grayscale(30%);
+      position: relative;
+    }
+    .animal-icons-row span {
+      animation: float 3s ease-in-out infinite;
+    }
+    .animal-icons-row span:nth-child(1) { animation-delay: 0s; }
+    .animal-icons-row span:nth-child(2) { animation-delay: 0.4s; }
+    .animal-icons-row span:nth-child(3) { animation-delay: 0.8s; }
+    .animal-icons-row span:nth-child(4) { animation-delay: 1.2s; }
+    .animal-icons-row span:nth-child(5) { animation-delay: 1.6s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-6px); }
+    }
+
+    .top-body {
+      padding: 32px 20px 40px;
+    }
+
+    .meta-tag-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .meta-tag {
+      background: var(--gray-100);
+      border-radius: var(--r-full);
+      padding: 5px 12px;
+      font-size: 12px;
+      color: var(--gray-700);
+      font-weight: 500;
+    }
+
+    .info-card {
+      background: var(--gray-100);
+      border-radius: var(--r-md);
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    .info-card-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin-bottom: 12px;
+    }
+    .info-card-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--gray-700);
+      padding: 4px 0;
+    }
+    .info-card-item::before {
+      content: '—';
+      color: var(--gray-300);
+      font-size: 12px;
+    }
+
+    .live-banner {
+      background: var(--black);
+      color: var(--white);
+      border-radius: var(--r-md);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      text-decoration: none;
+    }
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background: #ff4444;
+      border-radius: 50%;
+      animation: pulse 1.5s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.6; transform: scale(1.3); }
+    }
+    .live-text { font-size: 13px; line-height: 1.4; }
+    .live-text strong { display: block; font-size: 14px; }
+
+    /* ===== =============================== ===== */
+    /* ===== QUESTION SCREEN                  ===== */
+    /* ===== =============================== ===== */
+
+    #screen-question {
+      background: var(--white);
+    }
+
+    .q-header {
+      padding: 20px 20px 0;
+      position: sticky;
+      top: 0;
+      background: var(--white);
+      z-index: 10;
+      border-bottom: 1px solid var(--gray-100);
+      padding-bottom: 16px;
+    }
+
+    .q-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .q-number {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+    }
+
+    .q-back-btn {
+      background: none;
+      border: none;
+      color: var(--gray-500);
+      font-size: 12px;
+      cursor: pointer;
+      padding: 4px 0;
+      font-family: inherit;
+    }
+    .q-back-btn:active { color: var(--black); }
+
+    .progress-track {
+      height: 3px;
+      background: var(--gray-200);
+      border-radius: var(--r-full);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--black);
+      border-radius: var(--r-full);
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .q-body {
+      flex: 1;
+      padding: 40px 20px 32px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .q-text {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.45;
+      letter-spacing: -0.01em;
+      margin-bottom: 36px;
+    }
+
+    .choices {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex: 1;
+    }
+
+    .choice-card {
+      background: var(--white);
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--r-lg);
+      padding: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      transition: all 0.15s ease;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    .choice-card:active {
+      border-color: var(--black);
+      background: var(--gray-100);
+      transform: scale(0.99);
+    }
+
+    .choice-card.selected {
+      border-color: var(--black);
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .choice-label {
+      width: 28px;
+      height: 28px;
+      border-radius: var(--r-full);
+      background: var(--gray-100);
+      color: var(--gray-700);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+      transition: all 0.15s ease;
+    }
+
+    .choice-card.selected .choice-label {
+      background: rgba(255,255,255,0.2);
+      color: var(--white);
+    }
+
+    .choice-text {
+      font-size: 15px;
+      line-height: 1.6;
+      font-weight: 500;
+      flex: 1;
+    }
+
+    /* ===== =============================== ===== */
+    /* ===== LOADING SCREEN                   ===== */
+    /* ===== =============================== ===== */
+
+    #screen-loading {
+      background: var(--black);
+      color: var(--white);
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .loading-inner {
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .loading-animal {
+      font-size: 72px;
+      animation: loadingFloat 1.2s ease-in-out infinite;
+    }
+
+    @keyframes loadingFloat {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; }
+      50%       { transform: translateY(-12px) scale(1.05); opacity: 1; }
+    }
+
+    .loading-title {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .loading-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .loading-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      animation: dotPulse 1.4s ease-in-out infinite;
+    }
+
+    .loading-dot:nth-child(1) { animation-delay: 0s; }
+    .loading-dot:nth-child(2) { animation-delay: 0.2s; }
+    .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes dotPulse {
+      0%, 80%, 100% { transform: scale(0.8); opacity: 0.3; }
+      40%            { transform: scale(1.2); opacity: 1; }
+    }
+
+    .loading-message {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== =============================== ===== */
+    /* ===== RESULT SCREEN                    ===== */
+    /* ===== =============================== ===== */
+
+    #screen-result {
+      background: var(--bg);
+    }
+
+    .result-hero {
+      background: var(--accent);
+      color: var(--white);
+      padding: 52px 20px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .result-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center top, rgba(255,255,255,0.08) 0%, transparent 60%);
+    }
+
+    .result-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.65;
+      margin-bottom: 20px;
+    }
+
+    .result-animal-icon {
+      font-size: 80px;
+      margin-bottom: 16px;
+      display: block;
+      animation: resultBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes resultBounce {
+      from { transform: scale(0.5); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    .result-type-name {
+      font-size: clamp(26px, 7vw, 34px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      position: relative;
+    }
+
+    .result-catchcopy {
+      font-size: 14px;
+      opacity: 0.75;
+      line-height: 1.6;
+      margin-top: 12px;
+      position: relative;
+      font-style: italic;
+    }
+
+    .result-axes {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+      position: relative;
+    }
+
+    .axis-badge {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: var(--r-full);
+      padding: 5px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    /* 結果 ボディ */
+    .result-body {
+      padding: 0 0 60px;
+    }
+
+    .result-section {
+      background: var(--white);
+      margin: 16px 16px 0;
+      border-radius: var(--r-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin-bottom: 12px;
+    }
+
+    .result-desc {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--gray-900);
+    }
+
+    /* シェアボタン群 */
+    .share-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .share-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px;
+      border-radius: var(--r-full);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all 0.15s ease;
+      font-family: inherit;
+      letter-spacing: 0.02em;
+    }
+    .share-btn:active { transform: scale(0.97); }
+
+    .share-x {
+      background: #000000;
+      color: #ffffff;
+    }
+
+    .share-line {
+      background: #06C755;
+      color: #ffffff;
+    }
+
+    .share-copy {
+      background: var(--gray-100);
+      color: var(--black);
+      border: 1.5px solid var(--gray-200);
+    }
+
+    /* 商品エリア */
+    .product-card {
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--r-md);
+      overflow: hidden;
+    }
+
+    .product-header {
+      background: var(--gray-100);
+      padding: 14px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gray-700);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .product-body {
+      padding: 16px;
+    }
+
+    .product-emoji {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    .product-name {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .product-sub {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    /* 相性タイプ */
+    .compat-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .compat-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: var(--gray-100);
+      border-radius: var(--r-md);
+    }
+
+    .compat-emoji { font-size: 24px; }
+
+    .compat-info { flex: 1; }
+    .compat-role { font-size: 11px; color: var(--gray-500); font-weight: 600; margin-bottom: 2px; }
+    .compat-name { font-size: 15px; font-weight: 700; }
+
+    /* 投稿スタイル */
+    .post-style-box {
+      background: var(--gray-100);
+      border-radius: var(--r-md);
+      padding: 16px;
+    }
+
+    .post-style-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .post-style-text {
+      font-size: 13px;
+      color: var(--gray-700);
+      line-height: 1.7;
+    }
+
+    .hashtag-row {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .hashtag {
+      background: rgba(0,0,0,0.07);
+      border-radius: var(--r-full);
+      padding: 3px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gray-700);
+    }
+
+    /* もう一度 / 商品ページ */
+    .result-footer {
+      margin: 24px 16px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .tiktok-live-banner {
+      margin: 16px 16px 0;
+      background: var(--black);
+      color: var(--white);
+      border-radius: var(--r-lg);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .tiktok-icon { font-size: 28px; flex-shrink: 0; }
+
+    .tiktok-text { flex: 1; }
+    .tiktok-text strong { display: block; font-size: 14px; margin-bottom: 2px; }
+    .tiktok-text span { font-size: 12px; color: rgba(255,255,255,0.6); }
+
+    /* ===== トースト ===== */
+    .toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--black);
+      color: var(--white);
+      padding: 12px 24px;
+      border-radius: var(--r-full);
+      font-size: 13px;
+      font-weight: 600;
+      opacity: 0;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 9999;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ===== レスポンシブ ===== */
+    @media (min-width: 480px) {
+      .result-section { margin: 16px auto 0; max-width: 440px; }
+      .result-footer   { max-width: 440px; margin-left: auto; margin-right: auto; }
+      .tiktok-live-banner { max-width: 440px; margin-left: auto; margin-right: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========================================= -->
+<!-- TOP SCREEN                                -->
+<!-- ========================================= -->
+<div id="screen-top" class="screen active">
+  <div class="top-hero">
+    <div class="brand-badge">JECCA × ANIMATCH</div>
+    <h1 class="top-headline">あなたの中の<br>動物は、何ですか？</h1>
+    <p class="top-subline">8問に答えて、あなたの<br>JECCA動物タイプを診断しよう</p>
+    <div class="animal-icons-row">
+      <span>🐕</span><span>🦁</span><span>🦋</span><span>🦒</span><span>🦄</span>
+    </div>
+  </div>
+
+  <div class="top-body">
+    <div class="container">
+      <div class="meta-tag-row">
+        <span class="meta-tag">全8問</span>
+        <span class="meta-tag">約1分</span>
+        <span class="meta-tag">登録不要</span>
+        <span class="meta-tag">無料</span>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">16タイプから診断</div>
+        <div class="info-card-item">4つの軸でパーソナリティを分析</div>
+        <div class="info-card-item">ペット派・野生派・ファンタジー派など</div>
+        <div class="info-card-item">あなたにぴったりのJECCAを提案</div>
+      </div>
+
+      <div class="live-banner">
+        <div class="live-dot"></div>
+        <div class="live-text">
+          <strong>TikTokライブ連動</strong>
+          診断結果をコメントでシェアしよう！
+        </div>
+      </div>
+
+      <button class="btn btn-primary" onclick="startDiagnosis()">
+        診断スタート →
+      </button>
+
+      <p class="text-sm text-muted text-center mt-4">
+        JECCAのブロック彫刻玩具と相性バツグンの<br>あなたのタイプを見つけよう
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================= -->
+<!-- QUESTION SCREEN                           -->
+<!-- ========================================= -->
+<div id="screen-question" class="screen">
+  <div class="q-header">
+    <div class="container">
+      <div class="q-meta">
+        <span class="q-number" id="q-number-text">Q1 / 8</span>
+        <button class="q-back-btn" onclick="goBack()">← 前に戻る</button>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-body">
+    <div class="container" style="flex:1; display:flex; flex-direction:column;">
+      <p class="q-text" id="q-text"></p>
+      <div class="choices" id="choices-container"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================= -->
+<!-- LOADING SCREEN                            -->
+<!-- ========================================= -->
+<div id="screen-loading" class="screen">
+  <div class="loading-inner">
+    <div class="loading-animal" id="loading-animal">🔮</div>
+    <div>
+      <div class="loading-title">あなたのJECCA動物を<br>解析中...</div>
+    </div>
+    <div class="loading-dots">
+      <div class="loading-dot"></div>
+      <div class="loading-dot"></div>
+      <div class="loading-dot"></div>
+    </div>
+    <div class="loading-message">4つの軸を組み合わせています</div>
+  </div>
+</div>
+
+<!-- ========================================= -->
+<!-- RESULT SCREEN                             -->
+<!-- ========================================= -->
+<div id="screen-result" class="screen">
+  <!-- ヒーロー -->
+  <div class="result-hero" id="result-hero">
+    <div class="result-label">あなたのタイプは...</div>
+    <span class="result-animal-icon" id="result-icon">🐕</span>
+    <h2 class="result-type-name" id="result-type-name">一途な柴犬タイプ</h2>
+    <p class="result-catchcopy" id="result-catchcopy">キャッチコピー</p>
+    <div class="result-axes" id="result-axes"></div>
+  </div>
+
+  <div class="result-body">
+    <!-- 性格説明 -->
+    <div class="result-section">
+      <div class="section-label">性格タイプ</div>
+      <p class="result-desc" id="result-desc"></p>
+    </div>
+
+    <!-- シェア（第1） -->
+    <div class="result-section">
+      <div class="section-label">この結果をシェアしよう</div>
+      <div class="share-buttons">
+        <button class="share-btn share-x" onclick="shareX()">
+          𝕏 &nbsp;X（Twitter）でシェア
+        </button>
+        <button class="share-btn share-line" onclick="shareLine()">
+          💬 &nbsp;LINEで送る
+        </button>
+        <button class="share-btn share-copy" onclick="copyResult()">
+          📋 &nbsp;テキストをコピー
+        </button>
+      </div>
+    </div>
+
+    <!-- おすすめ商品 -->
+    <div class="result-section">
+      <div class="section-label">あなたにぴったりのJECCA</div>
+      <div class="product-card">
+        <div class="product-header">おすすめモデル</div>
+        <div class="product-body">
+          <div class="product-emoji" id="result-product-emoji">🧩</div>
+          <div class="product-name" id="result-product-name">JECCAブロック</div>
+          <div class="product-sub" id="result-product-sub">あなたのタイプにぴったりのモデル</div>
+          <a id="result-product-link"
+             href="https://jekca-shop.com/collections"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="btn btn-accent">
+            商品を見る →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 投稿スタイル -->
+    <div class="result-section">
+      <div class="section-label">あなたの投稿スタイル</div>
+      <div class="post-style-box">
+        <div class="post-style-title" id="result-post-title">おすすめ投稿</div>
+        <div class="post-style-text" id="result-post-text"></div>
+        <div class="hashtag-row" id="result-hashtags"></div>
+      </div>
+    </div>
+
+    <!-- 相性タイプ -->
+    <div class="result-section">
+      <div class="section-label">相性のいいタイプ</div>
+      <div class="compat-row" id="result-compat"></div>
+      <p class="text-sm text-muted mt-4" style="line-height:1.6;">
+        「友達は何タイプ？」診断リンクを送ってみよう！
+      </p>
+    </div>
+
+    <!-- TikTokライブ -->
+    <div class="tiktok-live-banner">
+      <div class="tiktok-icon">📱</div>
+      <div class="tiktok-text">
+        <strong>TikTokライブで発表！</strong>
+        <span>コメントであなたのタイプを教えて！<br>#JECCA診断</span>
+      </div>
+    </div>
+
+    <!-- シェア（第2） -->
+    <div class="result-section">
+      <div class="section-label">シェアして友達を巻き込もう</div>
+      <div class="share-buttons">
+        <button class="share-btn share-x" onclick="shareX()">
+          𝕏 &nbsp;X（Twitter）でシェア
+        </button>
+        <button class="share-btn share-line" onclick="shareLine()">
+          💬 &nbsp;LINEで友達に送る
+        </button>
+      </div>
+    </div>
+
+    <div class="result-footer">
+      <a href="https://jekca-shop.com" target="_blank" rel="noopener noreferrer"
+         class="btn btn-outline">
+        JECCAショップを見る
+      </a>
+      <button class="btn btn-outline btn-sm" onclick="restartDiagnosis()">
+        もう一度診断する
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- トースト通知 -->
+<div class="toast" id="toast">コピーしました！</div>
+
+<script>
+/* ============================================
+   DATA: 質問データ
+   ============================================ */
+const QUESTIONS = [
+  {
+    id: 1,
+    axis: 'A',
+    text: 'あなたにとって、動物との理想の距離感は？',
+    choices: [
+      { label: 'A', text: '毎日一緒に暮らして、名前を呼びたい' },
+      { label: 'B', text: '会いに行けるくらいの距離で、ずっと見ていたい' }
+    ]
+  },
+  {
+    id: 2,
+    axis: 'A',
+    text: '街中でかわいい動物を見かけたとき、最初に思うことは？',
+    choices: [
+      { label: 'A', text: '「うちの子もこんな感じだな」と自分のペットを思い出す' },
+      { label: 'B', text: '「いつかこの動物に会いに行きたい！」と計画が膨らむ' }
+    ]
+  },
+  {
+    id: 3,
+    axis: 'B',
+    text: '動物の動画を見ていて、一番グッとくる瞬間は？',
+    choices: [
+      { label: 'A', text: '「この顔、まるで人間みたい...」と感情が伝わってきた瞬間' },
+      { label: 'B', text: '「この動き、本物の野生だ...」と生き物の本能を感じた瞬間' }
+    ]
+  },
+  {
+    id: 4,
+    axis: 'B',
+    text: '好きな動物の動画を見たとき、最初にやることは？',
+    choices: [
+      { label: 'A', text: '「かわいい！人間みたい！」とコメントする' },
+      { label: 'B', text: '「この種の特徴が出てる！」と詳しい情報を調べてしまう' }
+    ]
+  },
+  {
+    id: 5,
+    axis: 'C',
+    text: 'お気に入りの動物グッズを手に入れたとき、どうする？',
+    choices: [
+      { label: 'A', text: '部屋の特等席に飾って、毎日眺める' },
+      { label: 'B', text: 'すぐ写真を撮って、SNSにアップする' }
+    ]
+  },
+  {
+    id: 6,
+    axis: 'C',
+    text: '感動した動物の写真や映像、どうしたい？',
+    choices: [
+      { label: 'A', text: '自分だけの記念として大切に保存する' },
+      { label: 'B', text: '「見て！」とすぐに誰かに送りたくなる' }
+    ]
+  },
+  {
+    id: 7,
+    axis: 'D',
+    text: 'JECCAのブロック彫刻を初めて見たとき、どんな感情が湧いた？',
+    choices: [
+      { label: 'A', text: '「うちの子に似てる！」「あの子そっくり！」という共感' },
+      { label: 'B', text: '「こんな動物いるんだ！」「これ欲しい！」という新しい発見' }
+    ]
+  },
+  {
+    id: 8,
+    axis: 'D',
+    text: 'JECCAでひとつ選ぶとしたら、どっちが気になる？',
+    choices: [
+      { label: 'A', text: '自分のペットや、よく知っている動物のリアルなモデル' },
+      { label: 'B', text: 'まだ出会ったことのない生き物や、架空の動物のデザイン' }
+    ]
+  }
+];
+
+/* ============================================
+   DATA: 16タイプデータ
+   ============================================ */
+const TYPES = {
+  AAAA: {
+    name: '一途な柴犬タイプ',
+    icon: '🐕',
+    catchcopy: 'うちの子への愛は、言葉よりも形で伝えたい。',
+    desc: 'あなたはペットへの愛情を、静かに、しかし確実に積み重ねていくタイプです。毎朝「今日もよろしくね」とそっと話しかけるような、一途で深い絆を育む愛情家。「うちの子に似てる」と気づいた瞬間、迷わず飾ることを決める。その直感は、いつも正しい。\n\nそんなあなたにとって、JECCAは「うちの子を永遠に手元に置く」ための特別な方法になるはずです。',
+    axes: ['ペットオーナー', '擬人化型', '飾る派', '共感・再現型'],
+    product: { name: 'DOGシリーズ（柴犬）', sub: '精巧に再現された柴犬ブロック彫刻', emoji: '🐕', url: 'https://jekca-shop.com/collections/%E7%8A%AC' },
+    post: { title: '「うちの子 vs JECCA比較動画」', text: '本物のペットとJECCAを並べて写真・動画を撮影！「うちの子そっくり！」のリアクション動画が鉄板コンテンツ。', tags: ['#うちの子そっくり', '#ペットのいる暮らし', '#JECCA診断'] },
+    compat: [
+      { role: '最高の相棒', name: 'コーギータイプ', emoji: '🐕' },
+      { role: '良き理解者', name: 'ブリティッシュ・ショートヘアタイプ', emoji: '🐱' }
+    ],
+    accent: '#8B5E3C',
+    shareText: '一途な柴犬タイプ🐕\nうちの子への愛は、言葉よりも形で伝えたい。\n静かで一途な愛情家、それが私。'
+  },
+  AAAB: {
+    name: '欲張りなコーギータイプ',
+    icon: '🐾',
+    catchcopy: 'うちの子も好き、でも他の子も気になる。愛は広がり続ける。',
+    desc: 'あなたのペット愛は、ひとつの命に留まらない。うちの子への愛情は本物でありながら、他の動物にも自然と心が向いてしまう。欲張りではなく、愛情の器がただ大きいのです。コーギーのように愛嬌と実直さを兼ね備え、気づけば家中が"お気に入りの子たち"でいっぱいになっている。\n\nそんなあなたには、JECCAで「うちの子ギャラリー」を作ることをおすすめします。',
+    axes: ['ペットオーナー', '擬人化型', '飾る派', '憧れ・発見型'],
+    product: { name: 'DOGシリーズ（コーギー）', sub: '複数犬種を並べた"うちの子ギャラリー"', emoji: '🐕', url: 'https://jekca-shop.com/collections/%E7%8A%AC' },
+    post: { title: '「集めてみたらこうなった」コレクション紹介動画', text: 'お気に入りのJECCAを並べて、コレクション紹介！ビフォーアフターで部屋の変化を見せると反応が上がる。', tags: ['#コレクション', '#ペットグッズ沼', '#JECCA診断'] },
+    compat: [
+      { role: '最高の相棒', name: '柴犬タイプ', emoji: '🐕' },
+      { role: '良き理解者', name: 'メインクーンタイプ', emoji: '🐱' }
+    ],
+    accent: '#C47830',
+    shareText: '欲張りなコーギータイプ🐾\nうちの子も好き、でも他の子も気になる。愛は広がり続ける。\n愛情の器が大きすぎる人、集まれ。'
+  },
+  AABA: {
+    name: '共感型シェアラーのビーグルタイプ',
+    icon: '🐶',
+    catchcopy: '「これ、うちの子にそっくり！」が止まらない共感の達人。',
+    desc: 'あなたはペットへの愛情を、発信することで完成させるタイプです。「見て！これうちの子じゃん！」という瞬間の興奮をSNSですぐに表現せずにはいられない。ビーグルのように誰とでも仲良くなれる社交性と、本能的な嗅覚で「いいもの」を見つける直感を持っています。\n\nあなたの投稿が誰かの「私も！」を引き出すことで、コミュニティが生まれていく。JECCAはあなたの発信に、最高のコンテンツを提供します。',
+    axes: ['ペットオーナー', '擬人化型', '発信・投稿派', '共感・再現型'],
+    product: { name: 'DOGシリーズ（ビーグル）', sub: '飼い犬の犬種に合わせてセレクト', emoji: '🐶', url: 'https://jekca-shop.com/collections/%E7%8A%AC' },
+    post: { title: '「本物の愛犬と並べた比較」リアクション動画', text: 'リアルな愛犬とJECCAを並べて撮影！「どっちが本物？」形式で視聴者参加型に。コメントが爆増する。', tags: ['#うちの子', '#ペット好きと繋がりたい', '#JECCA診断'] },
+    compat: [
+      { role: '最高の相棒', name: 'カメレオンタイプ', emoji: '🦎' },
+      { role: '良き理解者', name: 'ナマケモノタイプ', emoji: '🦥' }
+    ],
+    accent: '#A04830',
+    shareText: '共感型シェアラーのビーグルタイプ🐶\n「これ、うちの子にそっくり！」が止まらない共感の達人。\n共感した人はRT！'
+  },
+  AABB: {
+    name: '推し活インフルエンサーのオウムタイプ',
+    icon: '🦜',
+    catchcopy: '憧れの子を全力で推す、なりきりキャプション量産機。',
+    desc: 'あなたはペットへの愛を「推し活」として昇華するプロフェッショナルです。クルマサカオウムのように華やかで個性的、そして声が通る。あなたの投稿はいつも「キャラが立っていて」、フォロワーの記憶に残り続けます。\n\nJECCAの商品を推すときも、あなたのキャラクターが炸裂する。それがあなたの最大の武器です。',
+    axes: ['ペットオーナー', '擬人化型', '発信・投稿派', '憧れ・発見型'],
+    product: { name: '鳥類シリーズ（オウム・インコ系）', sub: 'またはファンタジーシリーズとの組み合わせ', emoji: '🦜', url: 'https://jekca-shop.com/collections/%E9%B3%A5' },
+    post: { title: 'キャラクター化・擬人化動画', text: '動物を擬人化したキャラクターコンテンツ！「もし〇〇が喋ったら」「JECCAになった日」シリーズで連続投稿。', tags: ['#推し活', '#ペット擬人化', '#JECCA診断'] },
+    compat: [
+      { role: '最高の相棒', name: 'ブロッキーライオンタイプ', emoji: '🦁' },
+      { role: '良き理解者', name: 'モルモットタイプ', emoji: '🐹' }
+    ],
+    accent: '#C8A020',
+    shareText: '推し活インフルエンサーのオウムタイプ🦜\n憧れの子を全力で推す、なりきりキャプション量産機。\nあなたは何タイプ？'
+  },
+  ABAA: {
+    name: '静かな完璧主義者のブリティッシュタイプ',
+    icon: '🐱',
+    catchcopy: '本物に似ていないなら、飾る意味がない。',
+    desc: 'あなたのこだわりは、ディテールに宿っています。毛の流れ、体型のバランス、目の形——本物と並べたとき「似ている」と確信できるものしか信頼しない。ブリティッシュ・ショートヘアのように重厚感があり、自分のペースを乱されない静けさの中で、深く愛情を育てています。\n\nJECCAの精巧な造形は、あなたの高い基準を満たす数少ない選択肢のひとつです。',
+    axes: ['ペットオーナー', '本物志向型', '飾る派', '共感・再現型'],
+    product: { name: 'CATシリーズ（ブリティッシュ・ショートヘア）', sub: 'リアルな体型と質感を再現した最高峰モデル', emoji: '🐱', url: 'https://jekca-shop.com/collections/%E7%8C%AB' },
+    post: { title: '「本物vs JECCA、どっちが本物？」比較・鑑定系動画', text: 'リアルな猫写真とJECCAを並べた「どっちが本物？」投稿。完成度の高さで視聴者を唸らせる鑑定系コンテンツが刺さる。', tags: ['#猫好き', '#ブリティッシュ', '#JECCA診断'] },
+    compat: [
+      { role: '最高の相棒', name: 'チータータイプ', emoji: '🐆' },
+      { role: '良き理解者', name: '柴犬タイプ', emoji: '🐕' }
+    ],
+    accent: '#607080',
+    shareText: '静かな完璧主義者のブリティッシュタイプ🐱\n本物に似ていないなら、飾る意味がない。\nディテールにこだわる審美眼の持ち主。'
+  },
+  ABAB: {
+    name: '無言の美術館館長メインクーンタイプ',
+    icon: '🐈',
+    catchcopy: '語らなくていい。並べた瞬間に、すべてが伝わる。',
+    desc: 'あなたのコレクションは、美術館のように静謐で完成度が高い。メインクーンのように堂々とした存在感を持ちながら、自分の世界観を声高に語ることはしない。憧れの動物を「本物に近いかたち」で手元に置くことで、内なる満足を積み重ねていく——それがあなたのスタイル。\n\nJECCAのラインナップは、あなたのギャラリーをさらに豊かにする可能性を秘めています。',
+    axes: ['ペットオーナー', '本物志向型', '飾る派', '憧れ・発見型'],
+    product: { name: 'CATシリーズ（メインクーン）', sub: 'ANIMALシリーズとの組み合わせギャラリー', emoji: '🐈', url: 'https://jekca-shop.com/collections/%E7%8C%AB' },
+    post: { title: '「コレクション棚タイムラプス」空間演出動画', text: 'コレクション棚の完成過程をタイムラプスで記録。BGMと照明にこだわった「棚インテリア」コンテンツで差別化。', tags: ['#インテリア', '#コレクション部屋', '#JECCA診断'] },
+    compat: [
+      { role: '最高の相棒', name: 'キリンタイプ', emoji: '🦒' },
+      { role: '良き理解者', name: 'コーギータイプ', emoji: '🐾' }
+    ],
+    accent: '#405850',
+    shareText: '無言の美術館館長メインクーンタイプ🐈\n語らなくていい。並べた瞬間に、すべてが伝わる。\n静かに完璧なコレクターがここにいる。'
+  },
+  ABBA: {
+    name: '発信する教育者カメレオンタイプ',
+    icon: '🦎',
+    catchcopy: '「見て！この精密さを！」世界に届けずにはいられない。',
+    desc: 'あなたはペットの美しさを、一人で抱えておくことができないタイプです。カメレオンのように観察眼が鋭く、他の人が見落としているディテールに最初に気づく。あなたのコンテンツは教育的でありながらエモーショナルで、フォロワーに「見る目」を与えてくれます。\n\nJECCAの職人的な造形美を最も理解し、最も伝えられるのは、あなたのような人です。',
+    axes: ['ペットオーナー', '本物志向型', '発信・投稿派', '共感・再現型'],
+    product: { name: '爬虫類シリーズ（カメレオン）', sub: '繊細なスケールまで再現した希少モデル', emoji: '🦎', url: 'https://jekca-shop.com/collections/%E3%81%9D%E3%81%AE%E4%BB%96' },
+    post: { title: '「なぜJECCAはリアルなのか解説」教育・比較動画', text: '爬虫類の本物写真と並べながら、JECCAの造形の凄さを解説する教育系コンテンツ。知識の深さがコンテンツの差別化になる。', tags: ['#爬虫類好き', '#精密模型', '#JECCA診断'] },
+    compat: [
+      { role: '最高の相棒', name: 'ビーグルタイプ', emoji: '🐶' },
+      { role: '良き理解者', name: 'T・レックスタイプ', emoji: '🦖' }
+    ],
+    accent: '#3A8050',
+    shareText: '発信する教育者カメレオンタイプ🦎\n「見て！この精密さを！」世界に届けずにはいられない。\n観察眼と発信力を持つタイプ。'
+  },
+  ABBB: {
+    name: '愛あるマニアのモルモットタイプ',
+    icon: '🐹',
+    catchcopy: '語り出したら止まらない。それは、深く愛しているから。',
+    desc: 'あなたの愛情は、知識の深さと比例しています。モルモットのように愛嬌がありながら、実はものすごい情報量を内側に持っている。マニアックな視点からの語りがじわじわとファンを獲得するタイプです。\n\nJECCAの製造技術やデザインの背景を深掘りして、そのマニア知識を発信してみてください。きっと強烈なファンが生まれます。',
+    axes: ['ペットオーナー', '本物志向型', '発信・投稿派', '憧れ・発見型'],
+    product: { name: '小動物シリーズ（モルモット）', sub: 'ANIMALシリーズ希少動物との組み合わせ', emoji: '🐹', url: 'https://jekca-shop.com/collections/%E3%81%9D%E3%81%AE%E4%BB%96' },
+    post: { title: '「知らなかったJECCAの凄い仕組み3選」トリビア動画', text: '動物の生態知識とJECCAの造形へのこだわりを組み合わせたトリビア・豆知識動画。深いところが刺さるマニア向けコンテンツ。', tags: ['#動物雑学', '#マニア', '#JECCA診断'] },
+    compat: [
+      { role: '最高の相棒', name: 'クルマサカオウムタイプ', emoji: '🦜' },
+      { role: '良き理解者', name: 'モアイタイプ', emoji: '🗿' }
+    ],
+    accent: '#8A6040',
+    shareText: '愛あるマニアのモルモットタイプ🐹\n語り出したら止まらない。それは、深く愛しているから。\n深い愛と知識を持つタイプ。'
+  },
+  BAAA: {
+    name: '部屋でそっと寄り添うコアラタイプ',
+    icon: '🐨',
+    catchcopy: '飼えないけれど、心はずっと一緒にいる。',
+    desc: 'あなたは、実際には飼えない動物への純粋な愛情を、丁寧な形で手元に残すことを選んだ人です。コアラのように、必要なものだけに囲まれたゆったりとした空間で、お気に入りの子に「おはよう」と声をかける毎日がある。静かに癒されることが好きで、その空間を自分だけの幸せとして守りたいタイプ。\n\nJECCAは、あなたが「飼いたかったけど飼えなかった」あの子を、永遠に手元に置く夢を叶えます。',
+    axes: ['動物好き', '擬人化型', '飾る派', '共感・再現型'],
+    product: { name: 'ANIMALシリーズ（コアラ）Sサイズ', sub: '部屋のどこにでも飾れるコンパクトモデル', emoji: '🐨', url: 'https://jekca-shop.com/collections/%E5%8B%95%E7%89%A9' },
+    post: { title: '「朝起きて最初に目が合う子」癒し系日常動画', text: '起き抜けにJECCAに「おはよう」と声をかける瞬間の日常動画。癒し系・ひとり暮らし系アカウントに最もフィットする投稿スタイル。', tags: ['#癒し', '#インテリア', '#ひとり暮らし', '#JECCA診断'] },
+    compat: [
+      { role: '最高の相棒', name: '柴犬タイプ', emoji: '🐕' },
+      { role: '良き理解者', name: 'ユニコーンタイプ', emoji: '🦄' }
+    ],
+    accent: '#8A9898',
+    shareText: '部屋でそっと寄り添うコアラタイプ🐨\n飼えないけれど、心はずっと一緒にいる。\n静かに深く愛する癒し系タイプ。'
+  },
+  BAAB: {
+    name: '夢の住人ユニコーンタイプ',
+    icon: '🦄',
+    catchcopy: '実在しない存在を愛せる人は、特別な魂の持ち主だと思う。',
+    desc: 'あなたの愛情は、現実の制約を超えます。「飼えるか飼えないか」よりも「美しいか、心が動くか」で選ぶ。ユニコーンのように実在しない存在にさえ深い愛を注げる人は、想像力と感受性が豊かな証拠です。現実と夢の境界線上で生きています。\n\nそんなあなたにとって、JECCAは「夢の世界を自分の棚に飾る」唯一の方法です。',
+    axes: ['動物好き', '擬人化型', '飾る派', '憧れ・発見型'],
+    product: { name: 'ファンタジーシリーズ（ユニコーン）', sub: '夢の世界をブロックで再現した幻獣モデル', emoji: '🦄', url: 'https://jekca-shop.com/collections/%E3%83%95%E3%82%A1%E3%83%B3%E3%82%BF%E3%82%B8%E3%83%BC' },
+    post: { title: '「魔法みたいな瞬間」ファンタジー演出動画', text: 'ムーディーな照明とBGMで幻想的な世界観を演出。「現実とファンタジーの境界線」をテーマにしたアート系コンテンツが刺さる。', tags: ['#ファンタジー', '#幻獣', '#夢の世界', '#JECCA診断'] },
+    compat: [
+      { role: '最高の相棒', name: 'コアラタイプ', emoji: '🐨' },
+      { role: '良き理解者', name: 'ブロッキーライオンタイプ', emoji: '🦁' }
+    ],
+    accent: '#8060A8',
+    shareText: '夢の住人ユニコーンタイプ🦄\n実在しない存在を愛せる人は、特別な魂の持ち主だと思う。\n夢と現実の境界線を生きるタイプ。'
+  },
+  BABA: {
+    name: 'マイペース発信者ナマケモノタイプ',
+    icon: '🦥',
+    catchcopy: 'ゆっくりでいい。でも、ちゃんと見ていてほしい。',
+    desc: 'あなたは急がない。でも、止まっているわけではない。ナマケモノのように一つ一つの動作は丁寧で、それ自体に意味があります。「見てほしい」という気持ちは確かにあって、でも媚びたくはない。そのさじ加減が絶妙で、静かに根強いファンを獲得するタイプです。\n\nJECCAの組み立て過程をゆっくり記録していくコンテンツは、あなたの発信スタイルと完璧に合います。',
+    axes: ['動物好き', '擬人化型', '発信・投稿派', '共感・再現型'],
+    product: { name: 'ANIMALシリーズ（ナマケモノ）', sub: 'のんびりとした雰囲気のリラックス系モデル', emoji: '🦥', url: 'https://jekca-shop.com/collections/%E5%8B%95%E7%89%A9' },
+    post: { title: '「ゆっくり組み立ててみた」タイムラプス・制作過程動画', text: 'JECCAの組み立て過程をタイムラプスや通常速度で記録。BGMだけのASMR的な静かな動画が意外と伸びる。じっくり見る系コンテンツ。', tags: ['#組み立て', '#制作過程', '#ASMR', '#JECCA診断'] },
+    compat: [
+      { role: '最高の相棒', name: 'ビーグルタイプ', emoji: '🐶' },
+      { role: '良き理解者', name: 'コアラタイプ', emoji: '🐨' }
+    ],
+    accent: '#6A8040',
+    shareText: 'マイペース発信者ナマケモノタイプ🦥\nゆっくりでいい。でも、ちゃんと見ていてほしい。\n焦らず自分のペースで発信するタイプ。'
+  },
+  BABB: {
+    name: '熱量系インフルエンサーのライオンタイプ',
+    icon: '🦁',
+    catchcopy: '憧れは語ってこそ。この熱さを止める必要はない。',
+    desc: 'あなたの熱量は、見ている人を動かします。ブロッキーライオンのように堂々としたビジュアルと、圧倒的な存在感。TikTokライブが最も輝く場所で、フォロワーを巻き込みながら盛り上げていく。「テンション高すぎ」と言われることがあるかもしれないけれど、それはあなたの愛が本物である証拠です。\n\nJECCAの商品を紹介するなら、あなたのライブが最強です。',
+    axes: ['動物好き', '擬人化型', '発信・投稿派', '憧れ・発見型'],
+    product: { name: 'ブロッキーアニマルシリーズ（ライオン）', sub: '存在感抜群のビッグサイズモデル', emoji: '🦁', url: 'https://jekca-shop.com/collections/%E5%8B%95%E7%89%A9' },
+    post: { title: 'ライブ・リアクション動画でTikTok LIVEをフル活用', text: 'TikTokライブでJECCAを紹介しながら、視聴者のコメントに熱くリアクション！ライブのアーカイブ切り抜きがそのままバズりやすいコンテンツになる。', tags: ['#ライオン', '#推し活', '#TikTokLIVE', '#JECCA診断'] },
+    compat: [
+      { role: '最高の相棒', name: 'クルマサカオウムタイプ', emoji: '🦜' },
+      { role: '良き理解者', name: 'T・レックスタイプ', emoji: '🦖' }
+    ],
+    accent: '#B88020',
+    shareText: '熱量系インフルエンサーのライオンタイプ🦁\n憧れは語ってこそ。この熱さを止める必要はない。\nTikTokライブで輝くタイプ！'
+  },
+  BBAA: {
+    name: '静かで鋭い審美眼チータータイプ',
+    icon: '🐆',
+    catchcopy: '本物の美しさと速さに惚れた目は、偽物を一瞬で見抜く。',
+    desc: 'あなたには、多くの人が見落とすものが見えます。チーターの体の流線型美、スポットの配置——そういった「設計の美しさ」に気づいたとき、静かに、深く心が動く。発信するとき、そのシャープな視点が読む人を唸らせます。\n\nJECCAの精巧な造形に、あなたの審美眼は必ず反応するはずです。',
+    axes: ['動物好き', '本物志向型', '飾る派', '共感・再現型'],
+    product: { name: 'ANIMALシリーズ（チーター）', sub: '野性の美しさを精密に再現したモデル', emoji: '🐆', url: 'https://jekca-shop.com/collections/%E5%8B%95%E7%89%A9' },
+    post: { title: '「なぜこのJECCAはリアルなのか」審美眼を見せる動画', text: 'チーターの実写写真とJECCAを並べ、「なぜリアルなのか」を3つのポイントで解説。鑑定士系・解説系コンテンツで差別化。', tags: ['#チーター', '#精密模型', '#動物好き', '#JECCA診断'] },
+    compat: [
+      { role: '最高の相棒', name: 'ブリティッシュ・ショートヘアタイプ', emoji: '🐱' },
+      { role: '良き理解者', name: 'モアイタイプ', emoji: '🗿' }
+    ],
+    accent: '#B08030',
+    shareText: '静かで鋭い審美眼チータータイプ🐆\n本物の美しさに惚れた目は、偽物を一瞬で見抜く。\n鋭い審美眼を持つコレクター。'
+  },
+  BBAB: {
+    name: '孤独な視点の高いキリンタイプ',
+    icon: '🦒',
+    catchcopy: '誰より高い場所から世界を見ている、静かなコレクター。',
+    desc: 'あなたのコレクションへの目線は、どこか俯瞰的です。「なぜこれが美しいか」を説明することにあまり興味がなく、自分の世界観を完成させることに集中しています。「本当に分かる人」とだけ繋がりたいという高い基準がある。\n\nJECCAで、あなただけのキュレーションドギャラリーを作ってください。きっと、分かる人には伝わります。',
+    axes: ['動物好き', '本物志向型', '飾る派', '憧れ・発見型'],
+    product: { name: 'ANIMALシリーズ（キリン）', sub: '棚の一番高い場所に一体だけ飾る存在感', emoji: '🦒', url: 'https://jekca-shop.com/collections/%E5%8B%95%E7%89%A9' },
+    post: { title: '「この部屋の主はどんな人？」世界観コンテンツ', text: '部屋のインテリアとJECCAを組み合わせた「世界観紹介」コンテンツ。多くを語らずにコレクションを見せるだけで、独自の世界観が伝わる。', tags: ['#インテリア', '#コレクター', '#世界観', '#JECCA診断'] },
+    compat: [
+      { role: '最高の相棒', name: 'メインクーンタイプ', emoji: '🐈' },
+      { role: '良き理解者', name: 'チータータイプ', emoji: '🐆' }
+    ],
+    accent: '#A07828',
+    shareText: '孤独な視点の高いキリンタイプ🦒\n誰より高い場所から世界を見ている、静かなコレクター。\n自分だけの世界観を持つタイプ。'
+  },
+  BBBA: {
+    name: '衝動型発信者T・レックスタイプ',
+    icon: '🦖',
+    catchcopy: 'この圧倒的な存在感を黙って見ていられるわけがない！',
+    desc: 'あなたは「いい！」と思った瞬間、体が動くタイプです。T・レックスのように、その場にいるだけで周囲の空気が変わる。熟考より行動。その無邪気さと熱量が、フォロワーに伝染していきます。\n\nJECCAの恐竜シリーズの最大サイズを手に入れた瞬間、あなたのリアクションは最高のコンテンツになります。',
+    axes: ['動物好き', '本物志向型', '発信・投稿派', '共感・再現型'],
+    product: { name: '恐竜シリーズ（T・レックス）最大サイズ', sub: '圧倒的な迫力と存在感の最大スペックモデル', emoji: '🦖', url: 'https://jekca-shop.com/collections/%E6%81%90%E7%AB%9C' },
+    post: { title: '「届いた！でかすぎ！」開封・組み立てリアクション動画', text: 'JECCAの大型モデルが届いた瞬間のリアクション動画！箱の大きさ→開封→サイズ比較→組み立て完成、の流れで衝動的な感動を伝える。', tags: ['#恐竜', '#開封動画', '#組み立て', '#JECCA診断'] },
+    compat: [
+      { role: '最高の相棒', name: 'ブロッキーライオンタイプ', emoji: '🦁' },
+      { role: '良き理解者', name: 'カメレオンタイプ', emoji: '🦎' }
+    ],
+    accent: '#286040',
+    shareText: '衝動型発信者T・レックスタイプ🦖\nこの圧倒的な存在感を黙って見ていられるわけがない！\n熱量がそのままコンテンツになるタイプ。'
+  },
+  BBBB: {
+    name: '発信し続ける哲学者モアイタイプ',
+    icon: '🗿',
+    catchcopy: '誰にも理解されなくていい。それでも、形にしなければ気が済まない。',
+    desc: 'あなたは誰かのために発信しているわけではありません。自分の内側にあるものを「形にすること」が目的であり、それが結果的に誰かに届くなら、それはおまけです。モアイのように、長い時間をかけて完成した存在が持つ圧倒的な説得力。\n\nあなたのコンテンツには、軽く消費できない「重さ」があって、それが真のファンを生み出します。JECCAはそんなあなたの内面を可視化する道具になれる。',
+    axes: ['動物好き', '本物志向型', '発信・投稿派', '憧れ・発見型'],
+    product: { name: '建築・古代遺跡シリーズ（モアイ像）', sub: '時を超えた存在感を持つ唯一無二のモデル', emoji: '🗿', url: 'https://jekca-shop.com/collections/%E5%BB%BA%E7%AF%89%E3%81%A8%E5%8F%A4%E4%BB%A3%E9%81%BA%E8%B7%A1' },
+    post: { title: '「深夜投稿・哲学系キャプション動画」内省的コンテンツ', text: '深夜に撮影した内省的な動画とJECCAを組み合わせたアート系コンテンツ。多くを語らない重厚なキャプションが真のファンを引き寄せる。', tags: ['#哲学', '#深夜投稿', '#コレクター哲学', '#JECCA診断'] },
+    compat: [
+      { role: '最高の相棒', name: 'モルモットタイプ', emoji: '🐹' },
+      { role: '良き理解者', name: 'チータータイプ', emoji: '🐆' }
+    ],
+    accent: '#706050',
+    shareText: '発信し続ける哲学者モアイタイプ🗿\n誰にも理解されなくていい。それでも、形にしなければ気が済まない。\n独自の世界を持つ唯一無二のタイプ。'
+  }
+};
+
+/* ============================================
+   STATE
+   ============================================ */
+let answers = [];
+let currentQ = 0;
+let resultType = null;
+const DIAGNOSE_URL = 'https://masalict-blinx.github.io/animatch/';
+
+/* ============================================
+   SCREEN CONTROL
+   ============================================ */
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById('screen-' + id);
+  if (el) el.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+/* ============================================
+   DIAGNOSIS LOGIC
+   ============================================ */
+function startDiagnosis() {
+  answers = [];
+  currentQ = 0;
+  showScreen('question');
+  renderQuestion();
+}
+
+function restartDiagnosis() {
+  startDiagnosis();
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[currentQ];
+
+  // ヘッダー
+  document.getElementById('q-number-text').textContent = `Q${q.id} / 8`;
+  const pct = (currentQ / 8) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+
+  // 質問文
+  document.getElementById('q-text').textContent = q.text;
+
+  // 選択肢
+  const container = document.getElementById('choices-container');
+  container.innerHTML = '';
+  q.choices.forEach(choice => {
+    const card = document.createElement('div');
+    card.className = 'choice-card';
+    card.innerHTML = `
+      <div class="choice-label">${choice.label}</div>
+      <div class="choice-text">${choice.text}</div>
+    `;
+    card.addEventListener('click', () => selectChoice(choice.label, card));
+    container.appendChild(card);
+  });
+}
+
+function selectChoice(label, cardEl) {
+  // 選択アニメーション
+  cardEl.classList.add('selected');
+
+  // 0.3秒後に次へ
+  setTimeout(() => {
+    answers.push(label);
+    currentQ++;
+
+    if (currentQ >= 8) {
+      showLoading();
+    } else {
+      renderQuestion();
+    }
+  }, 300);
+}
+
+function goBack() {
+  if (currentQ === 0) {
+    showScreen('top');
+    return;
+  }
+  answers.pop();
+  currentQ--;
+  renderQuestion();
+}
+
+/* ============================================
+   LOADING
+   ============================================ */
+function showLoading() {
+  showScreen('loading');
+
+  // ランダム動物をローディング中に表示
+  const icons = ['🐕', '🐱', '🦁', '🐨', '🦄', '🦒', '🦎', '🗿', '🦖'];
+  let i = 0;
+  const loadingAnimal = document.getElementById('loading-animal');
+  const interval = setInterval(() => {
+    loadingAnimal.textContent = icons[i % icons.length];
+    i++;
+  }, 300);
+
+  // 1.8秒後に結果へ
+  setTimeout(() => {
+    clearInterval(interval);
+    showResult();
+  }, 1800);
+}
+
+/* ============================================
+   RESULT LOGIC
+   ============================================ */
+function determineType(ans) {
+  function tiebreak(q1, q2) {
+    return q1 === q2 ? q1 : q2;
+  }
+
+  const axisA = tiebreak(ans[0], ans[1]);
+  const axisB = tiebreak(ans[2], ans[3]);
+  const axisC = tiebreak(ans[4], ans[5]);
+  const axisD = tiebreak(ans[6], ans[7]);
+
+  return axisA + axisB + axisC + axisD;
+}
+
+function showResult() {
+  const typeCode = determineType(answers);
+  resultType = TYPES[typeCode] || TYPES['AAAA'];
+
+  // アクセントカラー設定
+  document.documentElement.style.setProperty('--accent', resultType.accent);
+
+  // ヒーロー
+  document.getElementById('result-hero').style.background = resultType.accent;
+  document.getElementById('result-icon').textContent = resultType.icon;
+  document.getElementById('result-type-name').textContent = resultType.name;
+  document.getElementById('result-catchcopy').textContent = resultType.catchcopy;
+
+  // 4軸バッジ
+  const axesEl = document.getElementById('result-axes');
+  axesEl.innerHTML = resultType.axes.map(a =>
+    `<span class="axis-badge">${a}</span>`
+  ).join('');
+
+  // 説明文
+  document.getElementById('result-desc').textContent = resultType.desc;
+
+  // 商品
+  document.getElementById('result-product-emoji').textContent = resultType.product.emoji;
+  document.getElementById('result-product-name').textContent = resultType.product.name;
+  document.getElementById('result-product-sub').textContent = resultType.product.sub;
+  document.getElementById('result-product-link').href = resultType.product.url;
+  document.getElementById('result-product-link').style.background = resultType.accent;
+
+  // 投稿スタイル
+  document.getElementById('result-post-title').textContent = resultType.post.title;
+  document.getElementById('result-post-text').textContent = resultType.post.text;
+  const hashtagEl = document.getElementById('result-hashtags');
+  hashtagEl.innerHTML = resultType.post.tags.map(t =>
+    `<span class="hashtag">${t}</span>`
+  ).join('');
+
+  // 相性タイプ
+  const compatEl = document.getElementById('result-compat');
+  compatEl.innerHTML = resultType.compat.map(c => `
+    <div class="compat-item">
+      <div class="compat-emoji">${c.emoji}</div>
+      <div class="compat-info">
+        <div class="compat-role">${c.role}</div>
+        <div class="compat-name">${c.name}</div>
+      </div>
+    </div>
+  `).join('');
+
+  showScreen('result');
+}
+
+/* ============================================
+   SHARE FUNCTIONS
+   ============================================ */
+function buildShareText() {
+  if (!resultType) return '';
+  return `${resultType.shareText}\nあなたは何タイプ？→ ${DIAGNOSE_URL}\n#JECCA診断 #ジェッカブロック`;
+}
+
+function shareX() {
+  const text = encodeURIComponent(buildShareText());
+  const url = `https://twitter.com/intent/tweet?text=${text}`;
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function shareLine() {
+  const text = encodeURIComponent(buildShareText());
+  const url = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(DIAGNOSE_URL)}&text=${text}`;
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function copyResult() {
+  const text = buildShareText();
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(() => showToast('コピーしました！'));
+  } else {
+    // フォールバック
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try {
+      document.execCommand('copy');
+      showToast('コピーしました！');
+    } catch (_) {
+      showToast('コピーに失敗しました');
+    }
+    document.body.removeChild(ta);
+  }
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+</script>
+</body>
+</html>
