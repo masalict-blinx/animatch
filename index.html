@@ -7,12 +7,12 @@
 
   <!-- OGP -->
   <meta property="og:title" content="ANIMATCH - あなたのJEKCA動物タイプ診断">
-  <meta property="og:description" content="8問に答えて、あなたの動物タイプを診断！16タイプの中からあなたにぴったりの動物を見つけよう。">
+  <meta property="og:description" content="4問に答えて、あなたの動物タイプを診断！16タイプの中からあなたにぴったりの動物を見つけよう。">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://jekca-shop.com/cdn/shop/files/JEKCA_Logo.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="ANIMATCH - JEKCA動物タイプ診断">
-  <meta name="twitter:description" content="8問に答えて、あなたのJEKCA動物タイプを診断！あなたは何タイプ？">
+  <meta name="twitter:description" content="4問に答えて、あなたのJEKCA動物タイプを診断！あなたは何タイプ？">
 
   <style>
     /* ===== デザインシステム ===== */
@@ -802,6 +802,8 @@
       .tiktok-live-banner { max-width: 440px; margin-left: auto; margin-right: auto; }
     }
   </style>
+  <!-- Supabase SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -812,7 +814,7 @@
   <div class="top-hero">
     <div class="brand-badge">JEKCA × ANIMATCH</div>
     <h1 class="top-headline">あなたの中の<br>動物は、何ですか？</h1>
-    <p class="top-subline">8問に答えて、あなたの<br>JEKCA動物タイプを診断しよう</p>
+    <p class="top-subline">4問に答えて、あなたの<br>JEKCA動物タイプを診断しよう</p>
     <div class="animal-icons-row">
       <span>🐕</span><span>🦁</span><span>🦋</span><span>🦒</span><span>🦄</span>
     </div>
@@ -1009,6 +1011,61 @@
 
 <script>
 /* ============================================
+   SUPABASE ANALYTICS
+   ============================================ */
+const SUPABASE_URL = 'https://lfdmnfnrfwljdeoubfvx.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxmZG1uZm5yZndsamRlb3ViZnZ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3ODc1MjMsImV4cCI6MjA4NzM2MzUyM30.3X5JQ4UOmjJV3cx5_CBMPicV8yCe_O0pIrhqFquya90';
+
+const _supabase = window.supabase
+  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+  : null;
+
+// セッションIDを生成（ページロード時に1回）
+const _sessionId = (typeof crypto !== 'undefined' && crypto.randomUUID)
+  ? crypto.randomUUID()
+  : 'sess-' + Date.now() + '-' + Math.random().toString(36).slice(2, 9);
+
+// セッション開始を記録
+async function _trackSessionStart() {
+  if (!_supabase) return;
+  try {
+    await _supabase.from('animatch_sessions').insert({
+      session_id: _sessionId,
+      user_agent: navigator.userAgent.slice(0, 255),
+      referrer: document.referrer.slice(0, 255) || null
+    });
+  } catch (e) { /* 計測失敗は無視 */ }
+}
+
+// 各質問の回答をを記録
+async function _trackAnswer(questionNumber, questionText, choice, choiceText) {
+  if (!_supabase) return;
+  try {
+    await _supabase.from('animatch_answers').insert({
+      session_id: _sessionId,
+      question_number: questionNumber,
+      question_text: questionText,
+      choice: choice,
+      choice_text: choiceText
+    });
+  } catch (e) { /* 計測失敗は無視 */ }
+}
+
+// 診断結果を記録
+async function _trackResult(typeCode, typeName, typeIcon) {
+  if (!_supabase) return;
+  try {
+    await _supabase.from('animatch_sessions').update({
+      completed: true,
+      result_type: typeCode,
+      result_name: typeName,
+      result_icon: typeIcon,
+      completed_at: new Date().toISOString()
+    }).eq('session_id', _sessionId);
+  } catch (e) { /* 計測失敗は無視 */ }
+}
+
+/* ============================================
    DATA: 質問データ
    ============================================ */
 const QUESTIONS = [
@@ -1023,15 +1080,6 @@ const QUESTIONS = [
   },
   {
     id: 2,
-    axis: 'A',
-    text: '街中でかわいい動物を見かけたとき、最初に思うことは？',
-    choices: [
-      { label: 'A', text: '「うちの子もこんな感じだな」と自分のペットを思い出す' },
-      { label: 'B', text: '「いつかこの動物に会いに行きたい！」と計画が膨らむ' }
-    ]
-  },
-  {
-    id: 3,
     axis: 'B',
     text: '動物の動画を見ていて、一番グッとくる瞬間は？',
     choices: [
@@ -1040,16 +1088,7 @@ const QUESTIONS = [
     ]
   },
   {
-    id: 4,
-    axis: 'B',
-    text: '好きな動物の動画を見たとき、最初にやることは？',
-    choices: [
-      { label: 'A', text: '「かわいい！人間みたい！」とコメントする' },
-      { label: 'B', text: '「この種の特徴が出てる！」と詳しい情報を調べてしまう' }
-    ]
-  },
-  {
-    id: 5,
+    id: 3,
     axis: 'C',
     text: 'お気に入りの動物グッズを手に入れたとき、どうする？',
     choices: [
@@ -1058,25 +1097,7 @@ const QUESTIONS = [
     ]
   },
   {
-    id: 6,
-    axis: 'C',
-    text: '感動した動物の写真や映像、どうしたい？',
-    choices: [
-      { label: 'A', text: '自分だけの記念として大切に保存する' },
-      { label: 'B', text: '「見て！」とすぐに誰かに送りたくなる' }
-    ]
-  },
-  {
-    id: 7,
-    axis: 'D',
-    text: 'JEKCAのブロック彫刻を初めて見たとき、どんな感情が湧いた？',
-    choices: [
-      { label: 'A', text: '「うちの子に似てる！」「あの子そっくり！」という共感' },
-      { label: 'B', text: '「こんな動物いるんだ！」「これ欲しい！」という新しい発見' }
-    ]
-  },
-  {
-    id: 8,
+    id: 4,
     axis: 'D',
     text: 'JEKCAでひとつ選ぶとしたら、どっちが気になる？',
     choices: [
@@ -1356,6 +1377,7 @@ function showScreen(id) {
 function startDiagnosis() {
   answers = [];
   currentQ = 0;
+  _trackSessionStart();
   showScreen('question');
   renderQuestion();
 }
@@ -1368,8 +1390,8 @@ function renderQuestion() {
   const q = QUESTIONS[currentQ];
 
   // ヘッダー
-  document.getElementById('q-number-text').textContent = `Q${q.id} / 8`;
-  const pct = (currentQ / 8) * 100;
+  document.getElementById('q-number-text').textContent = `Q${q.id} / 4`;
+  const pct = (currentQ / 4) * 100;
   document.getElementById('progress-fill').style.width = pct + '%';
 
   // 質問文
@@ -1394,12 +1416,17 @@ function selectChoice(label, cardEl) {
   // 選択アニメーション
   cardEl.classList.add('selected');
 
+  // 回答をトラッキング
+  const q = QUESTIONS[currentQ];
+  const choiceData = q.choices.find(c => c.label === label);
+  _trackAnswer(q.id, q.text, label, choiceData ? choiceData.text : '');
+
   // 0.3秒後に次へ
   setTimeout(() => {
     answers.push(label);
     currentQ++;
 
-    if (currentQ >= 8) {
+    if (currentQ >= 4) {
       showLoading();
     } else {
       renderQuestion();
@@ -1443,14 +1470,10 @@ function showLoading() {
    RESULT LOGIC
    ============================================ */
 function determineType(ans) {
-  function tiebreak(q1, q2) {
-    return q1 === q2 ? q1 : q2;
-  }
-
-  const axisA = tiebreak(ans[0], ans[1]);
-  const axisB = tiebreak(ans[2], ans[3]);
-  const axisC = tiebreak(ans[4], ans[5]);
-  const axisD = tiebreak(ans[6], ans[7]);
+  const axisA = ans[0];
+  const axisB = ans[1];
+  const axisC = ans[2];
+  const axisD = ans[3];
 
   return axisA + axisB + axisC + axisD;
 }
@@ -1458,6 +1481,9 @@ function determineType(ans) {
 function showResult() {
   const typeCode = determineType(answers);
   resultType = TYPES[typeCode] || TYPES['AAAA'];
+
+  // 診断結果をトラッキング
+  _trackResult(typeCode, resultType.name, resultType.icon);
 
   // アクセントカラー設定
   document.documentElement.style.setProperty('--accent', resultType.accent);
