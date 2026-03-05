@@ -538,8 +538,8 @@
     }
 
     .result-animal-icon {
-      width: 140px;
-      height: 140px;
+      width: 220px;
+      height: 220px;
       object-fit: contain;
       margin-bottom: 16px;
       display: block;
@@ -913,7 +913,7 @@
 <div id="screen-result" class="screen">
   <!-- ヒーロー -->
   <div class="result-hero" id="result-hero">
-    <div class="result-label">あなたのタイプは...</div>
+    <div class="result-label" id="result-label">あなたのタイプは...</div>
     <img class="result-animal-icon" id="result-icon" src="images/JEAN.png" alt="タイプアイコン">
     <h2 class="result-type-name" id="result-type-name">一途な柴犬タイプ</h2>
     <p class="result-catchcopy" id="result-catchcopy">キャッチコピー</p>
@@ -953,7 +953,7 @@
           <div class="product-name" id="result-product-name">JEKCAブロック</div>
           <div class="product-sub" id="result-product-sub">あなたのタイプにぴったりのモデル</div>
           <a id="result-product-link"
-             href="https://jekca-shop.com/collections"
+             href="https://vt.tiktok.com/ZS9dMB8TdXd69-OHUjV/"
              target="_blank"
              rel="noopener noreferrer"
              class="btn btn-accent">
@@ -1518,7 +1518,7 @@ function showResult() {
   document.getElementById('result-product-emoji').textContent = resultType.product.emoji;
   document.getElementById('result-product-name').textContent = resultType.product.name;
   document.getElementById('result-product-sub').textContent = resultType.product.sub;
-  document.getElementById('result-product-link').href = resultType.product.url;
+  document.getElementById('result-product-link').href = 'https://vt.tiktok.com/ZS9dMB8TdXd69-OHUjV/';
   document.getElementById('result-product-link').style.background = resultType.accent;
 
   // 投稿スタイル
