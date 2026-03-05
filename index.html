@@ -641,8 +641,8 @@
     }
     .share-btn:active { transform: scale(0.97); }
 
-    .share-x {
-      background: #000000;
+    .share-instagram {
+      background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
       color: #ffffff;
     }
 
@@ -931,8 +931,8 @@
     <div class="result-section">
       <div class="section-label">この結果をシェアしよう</div>
       <div class="share-buttons">
-        <button class="share-btn share-x" onclick="shareX()">
-          𝕏 &nbsp;X（Twitter）でシェア
+        <button class="share-btn share-instagram" onclick="shareInstagram()">
+          📸 &nbsp;Instagramでシェア
         </button>
         <button class="share-btn share-line" onclick="shareLine()">
           💬 &nbsp;LINEで送る
@@ -995,8 +995,8 @@
     <div class="result-section">
       <div class="section-label">シェアして友達を巻き込もう</div>
       <div class="share-buttons">
-        <button class="share-btn share-x" onclick="shareX()">
-          𝕏 &nbsp;X（Twitter）でシェア
+        <button class="share-btn share-instagram" onclick="shareInstagram()">
+          📸 &nbsp;Instagramでシェア
         </button>
         <button class="share-btn share-line" onclick="shareLine()">
           💬 &nbsp;LINEで友達に送る
@@ -1552,10 +1552,19 @@ function buildShareText() {
   return `${resultType.shareText}\nあなたは何型？→ ${DIAGNOSE_URL}\n#JEKA診断 #JEKCA診断 #ジェッカブロック`;
 }
 
-function shareX() {
-  const text = encodeURIComponent(buildShareText());
-  const url = `https://twitter.com/intent/tweet?text=${text}`;
-  window.open(url, '_blank', 'noopener,noreferrer');
+function shareInstagram() {
+  const text = buildShareText();
+  if (navigator.share) {
+    navigator.share({
+      title: 'ANIMATCH診断結果',
+      text: text,
+      url: DIAGNOSE_URL
+    }).catch(() => {});
+  } else {
+    navigator.clipboard.writeText(text + '\n' + DIAGNOSE_URL).then(() => {
+      alert('テキストをコピーしました！\nInstagramアプリを開いてストーリーや投稿に貼り付けてください📸');
+    });
+  }
 }
 
 function shareLine() {
