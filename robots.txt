@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# AI クローラー明示許可
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+Sitemap: https://masalict-blinx.github.io/animatch/sitemap.xml
