@@ -1,28 +1,18 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3TV2Z9FHW3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-3TV2Z9FHW3');
-  </script>
-  <script src="https://ip-tracker.marketing-faa.workers.dev/tracker.js" data-site="jekca-animatch"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>JEKA診断 | あなたのJEKCA動物タイプ診断</title>
+  <title>ANIMATCH | あなたのJECCA動物タイプ診断</title>
 
   <!-- OGP -->
-  <meta property="og:title" content="JEKA診断 - あなたのJEKCA動物タイプ診断">
-  <meta property="og:description" content="4問に答えて、あなたのJEKAタイプを診断！JEAN型・KCAT型など16タイプの中からあなたにぴったりの動物を見つけよう。">
+  <meta property="og:title" content="ANIMATCH - あなたのJECCA動物タイプ診断">
+  <meta property="og:description" content="8問に答えて、あなたの動物タイプを診断！16タイプの中からあなたにぴったりの動物を見つけよう。">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://jekca-shop.com/cdn/shop/files/JEKCA_Logo.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="JEKA診断 - JEKCA動物タイプ診断">
-  <meta name="twitter:description" content="4問に答えて、あなたのJEKAタイプを診断！あなたは何型？">
+  <meta name="twitter:title" content="ANIMATCH - JECCA動物タイプ診断">
+  <meta name="twitter:description" content="8問に答えて、あなたのJECCA動物タイプを診断！あなたは何タイプ？">
 
   <style>
     /* ===== デザインシステム ===== */
@@ -223,13 +213,11 @@
       justify-content: center;
       gap: 12px;
       margin-top: 28px;
+      font-size: 28px;
       filter: grayscale(30%);
       position: relative;
     }
-    .animal-icons-row img {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
+    .animal-icons-row span {
       animation: float 3s ease-in-out infinite;
     }
     .animal-icons-row span:nth-child(1) { animation-delay: 0s; }
@@ -548,13 +536,9 @@
     }
 
     .result-animal-icon {
-      width: 220px;
-      height: 220px;
-      object-fit: contain;
+      font-size: 80px;
       margin-bottom: 16px;
       display: block;
-      margin-left: auto;
-      margin-right: auto;
       animation: resultBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     }
 
@@ -651,8 +635,8 @@
     }
     .share-btn:active { transform: scale(0.97); }
 
-    .share-instagram {
-      background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+    .share-x {
+      background: #000000;
       color: #ffffff;
     }
 
@@ -818,8 +802,7 @@
       .tiktok-live-banner { max-width: 440px; margin-left: auto; margin-right: auto; }
     }
   </style>
-  <!-- Supabase SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>window.BLINX_DEBUG = { project: 'ANIMATCH', version: '' }</script>
 </head>
 <body>
 
@@ -828,32 +811,28 @@
 <!-- ========================================= -->
 <div id="screen-top" class="screen active">
   <div class="top-hero">
-    <div class="brand-badge">JEKCA × JEKA診断</div>
+    <div class="brand-badge">JECCA × ANIMATCH</div>
     <h1 class="top-headline">あなたの中の<br>動物は、何ですか？</h1>
-    <p class="top-subline">4問に答えて、あなたの<br>JEKAタイプを診断しよう</p>
+    <p class="top-subline">8問に答えて、あなたの<br>JECCA動物タイプを診断しよう</p>
     <div class="animal-icons-row">
-      <img src="images/animatch_corgi.png" alt="コーギー">
-      <img src="images/animatch_koala.png" alt="コアラ">
-      <img src="images/animatch_leopard.png" alt="チーター">
-      <img src="images/animatch_parrot.png" alt="オウム">
-      <img src="images/animatch_unicorn.png" alt="ユニコーン">
+      <span>🐕</span><span>🦁</span><span>🦋</span><span>🦒</span><span>🦄</span>
     </div>
   </div>
 
   <div class="top-body">
     <div class="container">
       <div class="meta-tag-row">
-        <span class="meta-tag">全4問</span>
+        <span class="meta-tag">全8問</span>
         <span class="meta-tag">約1分</span>
         <span class="meta-tag">登録不要</span>
         <span class="meta-tag">無料</span>
       </div>
 
       <div class="info-card">
-        <div class="info-card-title">JEAN型など16タイプから診断</div>
-        <div class="info-card-item">J/K・E/C・A/S・N/T の4軸で分析</div>
+        <div class="info-card-title">16タイプから診断</div>
+        <div class="info-card-item">4つの軸でパーソナリティを分析</div>
         <div class="info-card-item">ペット派・野生派・ファンタジー派など</div>
-        <div class="info-card-item">あなたにぴったりのJEKCAを提案</div>
+        <div class="info-card-item">あなたにぴったりのJECCAを提案</div>
       </div>
 
       <div class="live-banner">
@@ -869,7 +848,7 @@
       </button>
 
       <p class="text-sm text-muted text-center mt-4">
-        JEKCAのブロック彫刻玩具と相性バツグンの<br>あなたのタイプを見つけよう
+        JECCAのブロック彫刻玩具と相性バツグンの<br>あなたのタイプを見つけよう
       </p>
     </div>
   </div>
@@ -906,7 +885,7 @@
   <div class="loading-inner">
     <div class="loading-animal" id="loading-animal">🔮</div>
     <div>
-      <div class="loading-title">あなたのJEKCA動物を<br>解析中...</div>
+      <div class="loading-title">あなたのJECCA動物を<br>解析中...</div>
     </div>
     <div class="loading-dots">
       <div class="loading-dot"></div>
@@ -923,8 +902,8 @@
 <div id="screen-result" class="screen">
   <!-- ヒーロー -->
   <div class="result-hero" id="result-hero">
-    <div class="result-label" id="result-label">あなたのタイプは...</div>
-    <img class="result-animal-icon" id="result-icon" src="images/JEAN.png" alt="タイプアイコン">
+    <div class="result-label">あなたのタイプは...</div>
+    <span class="result-animal-icon" id="result-icon">🐕</span>
     <h2 class="result-type-name" id="result-type-name">一途な柴犬タイプ</h2>
     <p class="result-catchcopy" id="result-catchcopy">キャッチコピー</p>
     <div class="result-axes" id="result-axes"></div>
@@ -941,8 +920,8 @@
     <div class="result-section">
       <div class="section-label">この結果をシェアしよう</div>
       <div class="share-buttons">
-        <button class="share-btn share-instagram" onclick="shareInstagram()">
-          📸 &nbsp;Instagramでシェア
+        <button class="share-btn share-x" onclick="shareX()">
+          𝕏 &nbsp;X（Twitter）でシェア
         </button>
         <button class="share-btn share-line" onclick="shareLine()">
           💬 &nbsp;LINEで送る
@@ -955,15 +934,15 @@
 
     <!-- おすすめ商品 -->
     <div class="result-section">
-      <div class="section-label">あなたにぴったりのJEKCA</div>
+      <div class="section-label">あなたにぴったりのJECCA</div>
       <div class="product-card">
         <div class="product-header">おすすめモデル</div>
         <div class="product-body">
           <div class="product-emoji" id="result-product-emoji">🧩</div>
-          <div class="product-name" id="result-product-name">JEKCAブロック</div>
+          <div class="product-name" id="result-product-name">JECCAブロック</div>
           <div class="product-sub" id="result-product-sub">あなたのタイプにぴったりのモデル</div>
           <a id="result-product-link"
-             href="https://vt.tiktok.com/ZS9dMB8TdXd69-OHUjV/"
+             href="https://jekca-shop.com/collections"
              target="_blank"
              rel="noopener noreferrer"
              class="btn btn-accent">
@@ -997,7 +976,7 @@
       <div class="tiktok-icon">📱</div>
       <div class="tiktok-text">
         <strong>TikTokライブで発表！</strong>
-        <span>コメントであなたの型を教えて！<br>#JEKA診断 #JEKCA診断</span>
+        <span>コメントであなたのタイプを教えて！<br>#JECCA診断</span>
       </div>
     </div>
 
@@ -1005,8 +984,8 @@
     <div class="result-section">
       <div class="section-label">シェアして友達を巻き込もう</div>
       <div class="share-buttons">
-        <button class="share-btn share-instagram" onclick="shareInstagram()">
-          📸 &nbsp;Instagramでシェア
+        <button class="share-btn share-x" onclick="shareX()">
+          𝕏 &nbsp;X（Twitter）でシェア
         </button>
         <button class="share-btn share-line" onclick="shareLine()">
           💬 &nbsp;LINEで友達に送る
@@ -1017,7 +996,7 @@
     <div class="result-footer">
       <a href="https://jekca-shop.com" target="_blank" rel="noopener noreferrer"
          class="btn btn-outline">
-        JEKCAショップを見る
+        JECCAショップを見る
       </a>
       <button class="btn btn-outline btn-sm" onclick="restartDiagnosis()">
         もう一度診断する
@@ -1031,98 +1010,79 @@
 
 <script>
 /* ============================================
-   SUPABASE ANALYTICS
-   ============================================ */
-const SUPABASE_URL = 'https://lfdmnfnrfwljdeoubfvx.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxmZG1uZm5yZndsamRlb3ViZnZ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3ODc1MjMsImV4cCI6MjA4NzM2MzUyM30.3X5JQ4UOmjJV3cx5_CBMPicV8yCe_O0pIrhqFquya90';
-
-const _supabase = window.supabase
-  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-  : null;
-
-// セッションIDを生成（ページロード時に1回）
-const _sessionId = (typeof crypto !== 'undefined' && crypto.randomUUID)
-  ? crypto.randomUUID()
-  : 'sess-' + Date.now() + '-' + Math.random().toString(36).slice(2, 9);
-
-// セッション開始を記録
-async function _trackSessionStart() {
-  if (!_supabase) return;
-  try {
-    await _supabase.from('animatch_sessions').insert({
-      session_id: _sessionId,
-      user_agent: navigator.userAgent.slice(0, 255),
-      referrer: document.referrer.slice(0, 255) || null
-    });
-  } catch (e) { /* 計測失敗は無視 */ }
-}
-
-// 各質問の回答をを記録
-async function _trackAnswer(questionNumber, questionText, choice, choiceText) {
-  if (!_supabase) return;
-  try {
-    await _supabase.from('animatch_answers').insert({
-      session_id: _sessionId,
-      question_number: questionNumber,
-      question_text: questionText,
-      choice: choice,
-      choice_text: choiceText
-    });
-  } catch (e) { /* 計測失敗は無視 */ }
-}
-
-// 診断結果を記録
-async function _trackResult(typeCode, typeName, typeIcon) {
-  if (!_supabase) return;
-  try {
-    await _supabase.from('animatch_sessions').update({
-      completed: true,
-      result_type: typeCode,
-      result_name: typeName,
-      result_icon: typeIcon,
-      completed_at: new Date().toISOString()
-    }).eq('session_id', _sessionId);
-  } catch (e) { /* 計測失敗は無視 */ }
-}
-
-/* ============================================
    DATA: 質問データ
    ============================================ */
 const QUESTIONS = [
   {
     id: 1,
-    axis: 'JK',
+    axis: 'A',
     text: 'あなたにとって、動物との理想の距離感は？',
     choices: [
-      { label: 'J', text: '毎日一緒に暮らして、名前を呼びたい' },
-      { label: 'K', text: '会いに行けるくらいの距離で、ずっと見ていたい' }
+      { label: 'A', text: '毎日一緒に暮らして、名前を呼びたい' },
+      { label: 'B', text: '会いに行けるくらいの距離で、ずっと見ていたい' }
     ]
   },
   {
     id: 2,
-    axis: 'EC',
-    text: '動物の動画を見ていて、一番グッとくる瞬間は？',
+    axis: 'A',
+    text: '街中でかわいい動物を見かけたとき、最初に思うことは？',
     choices: [
-      { label: 'E', text: '「この顔、まるで人間みたい...」と感情が伝わってきた瞬間' },
-      { label: 'C', text: '「この動き、本物の野生だ...」と生き物の本能を感じた瞬間' }
+      { label: 'A', text: '「うちの子もこんな感じだな」と自分のペットを思い出す' },
+      { label: 'B', text: '「いつかこの動物に会いに行きたい！」と計画が膨らむ' }
     ]
   },
   {
     id: 3,
-    axis: 'AS',
-    text: 'お気に入りの動物グッズを手に入れたとき、どうする？',
+    axis: 'B',
+    text: '動物の動画を見ていて、一番グッとくる瞬間は？',
     choices: [
-      { label: 'A', text: '部屋の特等席に飾って、毎日眺める' },
-      { label: 'S', text: 'すぐ写真を撮って、SNSにアップする' }
+      { label: 'A', text: '「この顔、まるで人間みたい...」と感情が伝わってきた瞬間' },
+      { label: 'B', text: '「この動き、本物の野生だ...」と生き物の本能を感じた瞬間' }
     ]
   },
   {
     id: 4,
-    axis: 'NT',
-    text: 'JEKCAでひとつ選ぶとしたら、どっちが気になる？',
+    axis: 'B',
+    text: '好きな動物の動画を見たとき、最初にやることは？',
     choices: [
-      { label: 'N', text: '自分のペットや、よく知っている動物のリアルなモデル' },
-      { label: 'T', text: 'まだ出会ったことのない生き物や、架空の動物のデザイン' }
+      { label: 'A', text: '「かわいい！人間みたい！」とコメントする' },
+      { label: 'B', text: '「この種の特徴が出てる！」と詳しい情報を調べてしまう' }
+    ]
+  },
+  {
+    id: 5,
+    axis: 'C',
+    text: 'お気に入りの動物グッズを手に入れたとき、どうする？',
+    choices: [
+      { label: 'A', text: '部屋の特等席に飾って、毎日眺める' },
+      { label: 'B', text: 'すぐ写真を撮って、SNSにアップする' }
+    ]
+  },
+  {
+    id: 6,
+    axis: 'C',
+    text: '感動した動物の写真や映像、どうしたい？',
+    choices: [
+      { label: 'A', text: '自分だけの記念として大切に保存する' },
+      { label: 'B', text: '「見て！」とすぐに誰かに送りたくなる' }
+    ]
+  },
+  {
+    id: 7,
+    axis: 'D',
+    text: 'JECCAのブロック彫刻を初めて見たとき、どんな感情が湧いた？',
+    choices: [
+      { label: 'A', text: '「うちの子に似てる！」「あの子そっくり！」という共感' },
+      { label: 'B', text: '「こんな動物いるんだ！」「これ欲しい！」という新しい発見' }
+    ]
+  },
+  {
+    id: 8,
+    axis: 'D',
+    text: 'JECCAでひとつ選ぶとしたら、どっちが気になる？',
+    choices: [
+      { label: 'A', text: '自分のペットや、よく知っている動物のリアルなモデル' },
+      { label: 'B', text: 'まだ出会ったことのない生き物や、架空の動物のデザイン' }
     ]
   }
 ];
@@ -1131,245 +1091,245 @@ const QUESTIONS = [
    DATA: 16タイプデータ
    ============================================ */
 const TYPES = {
-  JEAN: {
+  AAAA: {
     name: '一途な柴犬タイプ',
     icon: '🐕',
     catchcopy: 'うちの子への愛は、言葉よりも形で伝えたい。',
-    desc: 'あなたはペットへの愛情を、静かに、しかし確実に積み重ねていくタイプです。毎朝「今日もよろしくね」とそっと話しかけるような、一途で深い絆を育む愛情家。「うちの子に似てる」と気づいた瞬間、迷わず飾ることを決める。その直感は、いつも正しい。\n\nそんなあなたにとって、JEKCAは「うちの子を永遠に手元に置く」ための特別な方法になるはずです。',
-    axes: ['J — ペットオーナー', 'E — 擬人化型', 'A — 飾る派', 'N — 共感型'],
+    desc: 'あなたはペットへの愛情を、静かに、しかし確実に積み重ねていくタイプです。毎朝「今日もよろしくね」とそっと話しかけるような、一途で深い絆を育む愛情家。「うちの子に似てる」と気づいた瞬間、迷わず飾ることを決める。その直感は、いつも正しい。\n\nそんなあなたにとって、JECCAは「うちの子を永遠に手元に置く」ための特別な方法になるはずです。',
+    axes: ['ペットオーナー', '擬人化型', '飾る派', '共感・再現型'],
     product: { name: 'DOGシリーズ（柴犬）', sub: '精巧に再現された柴犬ブロック彫刻', emoji: '🐕', url: 'https://jekca-shop.com/collections/%E7%8A%AC' },
-    post: { title: '「うちの子 vs JEKCA比較動画」', text: '本物のペットとJEKCAを並べて写真・動画を撮影！「うちの子そっくり！」のリアクション動画が鉄板コンテンツ。', tags: ['#うちの子そっくり', '#ペットのいる暮らし', '#JEKCA診断'] },
+    post: { title: '「うちの子 vs JECCA比較動画」', text: '本物のペットとJECCAを並べて写真・動画を撮影！「うちの子そっくり！」のリアクション動画が鉄板コンテンツ。', tags: ['#うちの子そっくり', '#ペットのいる暮らし', '#JECCA診断'] },
     compat: [
       { role: '最高の相棒', name: 'コーギータイプ', emoji: '🐕' },
       { role: '良き理解者', name: 'ブリティッシュ・ショートヘアタイプ', emoji: '🐱' }
     ],
     accent: '#8B5E3C',
-    shareText: '【JEAN型】一途な柴犬タイプ🐕\nうちの子への愛は、言葉よりも形で伝えたい。\n静かで一途な愛情家、それが私。'
+    shareText: '一途な柴犬タイプ🐕\nうちの子への愛は、言葉よりも形で伝えたい。\n静かで一途な愛情家、それが私。'
   },
-  JEAT: {
+  AAAB: {
     name: '欲張りなコーギータイプ',
     icon: '🐾',
     catchcopy: 'うちの子も好き、でも他の子も気になる。愛は広がり続ける。',
-    desc: 'あなたのペット愛は、ひとつの命に留まらない。うちの子への愛情は本物でありながら、他の動物にも自然と心が向いてしまう。欲張りではなく、愛情の器がただ大きいのです。コーギーのように愛嬌と実直さを兼ね備え、気づけば家中が"お気に入りの子たち"でいっぱいになっている。\n\nそんなあなたには、JEKCAで「うちの子ギャラリー」を作ることをおすすめします。',
-    axes: ['J — ペットオーナー', 'E — 擬人化型', 'A — 飾る派', 'T — 発見型'],
+    desc: 'あなたのペット愛は、ひとつの命に留まらない。うちの子への愛情は本物でありながら、他の動物にも自然と心が向いてしまう。欲張りではなく、愛情の器がただ大きいのです。コーギーのように愛嬌と実直さを兼ね備え、気づけば家中が"お気に入りの子たち"でいっぱいになっている。\n\nそんなあなたには、JECCAで「うちの子ギャラリー」を作ることをおすすめします。',
+    axes: ['ペットオーナー', '擬人化型', '飾る派', '憧れ・発見型'],
     product: { name: 'DOGシリーズ（コーギー）', sub: '複数犬種を並べた"うちの子ギャラリー"', emoji: '🐕', url: 'https://jekca-shop.com/collections/%E7%8A%AC' },
-    post: { title: '「集めてみたらこうなった」コレクション紹介動画', text: 'お気に入りのJEKCAを並べて、コレクション紹介！ビフォーアフターで部屋の変化を見せると反応が上がる。', tags: ['#コレクション', '#ペットグッズ沼', '#JEKCA診断'] },
+    post: { title: '「集めてみたらこうなった」コレクション紹介動画', text: 'お気に入りのJECCAを並べて、コレクション紹介！ビフォーアフターで部屋の変化を見せると反応が上がる。', tags: ['#コレクション', '#ペットグッズ沼', '#JECCA診断'] },
     compat: [
       { role: '最高の相棒', name: '柴犬タイプ', emoji: '🐕' },
       { role: '良き理解者', name: 'メインクーンタイプ', emoji: '🐱' }
     ],
     accent: '#C47830',
-    shareText: '【JEAT型】欲張りなコーギータイプ🐾\nうちの子も好き、でも他の子も気になる。愛は広がり続ける。\n愛情の器が大きすぎる人、集まれ。'
+    shareText: '欲張りなコーギータイプ🐾\nうちの子も好き、でも他の子も気になる。愛は広がり続ける。\n愛情の器が大きすぎる人、集まれ。'
   },
-  JESN: {
+  AABA: {
     name: '共感型シェアラーのビーグルタイプ',
     icon: '🐶',
     catchcopy: '「これ、うちの子にそっくり！」が止まらない共感の達人。',
-    desc: 'あなたはペットへの愛情を、発信することで完成させるタイプです。「見て！これうちの子じゃん！」という瞬間の興奮をSNSですぐに表現せずにはいられない。ビーグルのように誰とでも仲良くなれる社交性と、本能的な嗅覚で「いいもの」を見つける直感を持っています。\n\nあなたの投稿が誰かの「私も！」を引き出すことで、コミュニティが生まれていく。JEKCAはあなたの発信に、最高のコンテンツを提供します。',
-    axes: ['J — ペットオーナー', 'E — 擬人化型', 'S — 発信派', 'N — 共感型'],
+    desc: 'あなたはペットへの愛情を、発信することで完成させるタイプです。「見て！これうちの子じゃん！」という瞬間の興奮をSNSですぐに表現せずにはいられない。ビーグルのように誰とでも仲良くなれる社交性と、本能的な嗅覚で「いいもの」を見つける直感を持っています。\n\nあなたの投稿が誰かの「私も！」を引き出すことで、コミュニティが生まれていく。JECCAはあなたの発信に、最高のコンテンツを提供します。',
+    axes: ['ペットオーナー', '擬人化型', '発信・投稿派', '共感・再現型'],
     product: { name: 'DOGシリーズ（ビーグル）', sub: '飼い犬の犬種に合わせてセレクト', emoji: '🐶', url: 'https://jekca-shop.com/collections/%E7%8A%AC' },
-    post: { title: '「本物の愛犬と並べた比較」リアクション動画', text: 'リアルな愛犬とJEKCAを並べて撮影！「どっちが本物？」形式で視聴者参加型に。コメントが爆増する。', tags: ['#うちの子', '#ペット好きと繋がりたい', '#JEKCA診断'] },
+    post: { title: '「本物の愛犬と並べた比較」リアクション動画', text: 'リアルな愛犬とJECCAを並べて撮影！「どっちが本物？」形式で視聴者参加型に。コメントが爆増する。', tags: ['#うちの子', '#ペット好きと繋がりたい', '#JECCA診断'] },
     compat: [
       { role: '最高の相棒', name: 'カメレオンタイプ', emoji: '🦎' },
       { role: '良き理解者', name: 'ナマケモノタイプ', emoji: '🦥' }
     ],
     accent: '#A04830',
-    shareText: '【JESN型】共感型シェアラーのビーグルタイプ🐶\n「これ、うちの子にそっくり！」が止まらない共感の達人。\n共感した人はRT！'
+    shareText: '共感型シェアラーのビーグルタイプ🐶\n「これ、うちの子にそっくり！」が止まらない共感の達人。\n共感した人はRT！'
   },
-  JEST: {
+  AABB: {
     name: '推し活インフルエンサーのオウムタイプ',
     icon: '🦜',
     catchcopy: '憧れの子を全力で推す、なりきりキャプション量産機。',
-    desc: 'あなたはペットへの愛を「推し活」として昇華するプロフェッショナルです。クルマサカオウムのように華やかで個性的、そして声が通る。あなたの投稿はいつも「キャラが立っていて」、フォロワーの記憶に残り続けます。\n\nJEKCAの商品を推すときも、あなたのキャラクターが炸裂する。それがあなたの最大の武器です。',
-    axes: ['J — ペットオーナー', 'E — 擬人化型', 'S — 発信派', 'T — 発見型'],
+    desc: 'あなたはペットへの愛を「推し活」として昇華するプロフェッショナルです。クルマサカオウムのように華やかで個性的、そして声が通る。あなたの投稿はいつも「キャラが立っていて」、フォロワーの記憶に残り続けます。\n\nJECCAの商品を推すときも、あなたのキャラクターが炸裂する。それがあなたの最大の武器です。',
+    axes: ['ペットオーナー', '擬人化型', '発信・投稿派', '憧れ・発見型'],
     product: { name: '鳥類シリーズ（オウム・インコ系）', sub: 'またはファンタジーシリーズとの組み合わせ', emoji: '🦜', url: 'https://jekca-shop.com/collections/%E9%B3%A5' },
-    post: { title: 'キャラクター化・擬人化動画', text: '動物を擬人化したキャラクターコンテンツ！「もし〇〇が喋ったら」「JEKCAになった日」シリーズで連続投稿。', tags: ['#推し活', '#ペット擬人化', '#JEKCA診断'] },
+    post: { title: 'キャラクター化・擬人化動画', text: '動物を擬人化したキャラクターコンテンツ！「もし〇〇が喋ったら」「JECCAになった日」シリーズで連続投稿。', tags: ['#推し活', '#ペット擬人化', '#JECCA診断'] },
     compat: [
       { role: '最高の相棒', name: 'ブロッキーライオンタイプ', emoji: '🦁' },
       { role: '良き理解者', name: 'モルモットタイプ', emoji: '🐹' }
     ],
     accent: '#C8A020',
-    shareText: '【JEST型】推し活インフルエンサーのオウムタイプ🦜\n憧れの子を全力で推す、なりきりキャプション量産機。\nあなたは何型？'
+    shareText: '推し活インフルエンサーのオウムタイプ🦜\n憧れの子を全力で推す、なりきりキャプション量産機。\nあなたは何タイプ？'
   },
-  JCAN: {
+  ABAA: {
     name: '静かな完璧主義者のブリティッシュタイプ',
     icon: '🐱',
     catchcopy: '本物に似ていないなら、飾る意味がない。',
-    desc: 'あなたのこだわりは、ディテールに宿っています。毛の流れ、体型のバランス、目の形——本物と並べたとき「似ている」と確信できるものしか信頼しない。ブリティッシュ・ショートヘアのように重厚感があり、自分のペースを乱されない静けさの中で、深く愛情を育てています。\n\nJEKCAの精巧な造形は、あなたの高い基準を満たす数少ない選択肢のひとつです。',
-    axes: ['J — ペットオーナー', 'C — 本物志向型', 'A — 飾る派', 'N — 共感型'],
+    desc: 'あなたのこだわりは、ディテールに宿っています。毛の流れ、体型のバランス、目の形——本物と並べたとき「似ている」と確信できるものしか信頼しない。ブリティッシュ・ショートヘアのように重厚感があり、自分のペースを乱されない静けさの中で、深く愛情を育てています。\n\nJECCAの精巧な造形は、あなたの高い基準を満たす数少ない選択肢のひとつです。',
+    axes: ['ペットオーナー', '本物志向型', '飾る派', '共感・再現型'],
     product: { name: 'CATシリーズ（ブリティッシュ・ショートヘア）', sub: 'リアルな体型と質感を再現した最高峰モデル', emoji: '🐱', url: 'https://jekca-shop.com/collections/%E7%8C%AB' },
-    post: { title: '「本物vs JEKCA、どっちが本物？」比較・鑑定系動画', text: 'リアルな猫写真とJEKCAを並べた「どっちが本物？」投稿。完成度の高さで視聴者を唸らせる鑑定系コンテンツが刺さる。', tags: ['#猫好き', '#ブリティッシュ', '#JEKCA診断'] },
+    post: { title: '「本物vs JECCA、どっちが本物？」比較・鑑定系動画', text: 'リアルな猫写真とJECCAを並べた「どっちが本物？」投稿。完成度の高さで視聴者を唸らせる鑑定系コンテンツが刺さる。', tags: ['#猫好き', '#ブリティッシュ', '#JECCA診断'] },
     compat: [
       { role: '最高の相棒', name: 'チータータイプ', emoji: '🐆' },
       { role: '良き理解者', name: '柴犬タイプ', emoji: '🐕' }
     ],
     accent: '#607080',
-    shareText: '【JCAN型】静かな完璧主義者のブリティッシュタイプ🐱\n本物に似ていないなら、飾る意味がない。\nディテールにこだわる審美眼の持ち主。'
+    shareText: '静かな完璧主義者のブリティッシュタイプ🐱\n本物に似ていないなら、飾る意味がない。\nディテールにこだわる審美眼の持ち主。'
   },
-  JCAT: {
+  ABAB: {
     name: '無言の美術館館長メインクーンタイプ',
     icon: '🐈',
     catchcopy: '語らなくていい。並べた瞬間に、すべてが伝わる。',
-    desc: 'あなたのコレクションは、美術館のように静謐で完成度が高い。メインクーンのように堂々とした存在感を持ちながら、自分の世界観を声高に語ることはしない。憧れの動物を「本物に近いかたち」で手元に置くことで、内なる満足を積み重ねていく——それがあなたのスタイル。\n\nJEKCAのラインナップは、あなたのギャラリーをさらに豊かにする可能性を秘めています。',
-    axes: ['J — ペットオーナー', 'C — 本物志向型', 'A — 飾る派', 'T — 発見型'],
+    desc: 'あなたのコレクションは、美術館のように静謐で完成度が高い。メインクーンのように堂々とした存在感を持ちながら、自分の世界観を声高に語ることはしない。憧れの動物を「本物に近いかたち」で手元に置くことで、内なる満足を積み重ねていく——それがあなたのスタイル。\n\nJECCAのラインナップは、あなたのギャラリーをさらに豊かにする可能性を秘めています。',
+    axes: ['ペットオーナー', '本物志向型', '飾る派', '憧れ・発見型'],
     product: { name: 'CATシリーズ（メインクーン）', sub: 'ANIMALシリーズとの組み合わせギャラリー', emoji: '🐈', url: 'https://jekca-shop.com/collections/%E7%8C%AB' },
-    post: { title: '「コレクション棚タイムラプス」空間演出動画', text: 'コレクション棚の完成過程をタイムラプスで記録。BGMと照明にこだわった「棚インテリア」コンテンツで差別化。', tags: ['#インテリア', '#コレクション部屋', '#JEKCA診断'] },
+    post: { title: '「コレクション棚タイムラプス」空間演出動画', text: 'コレクション棚の完成過程をタイムラプスで記録。BGMと照明にこだわった「棚インテリア」コンテンツで差別化。', tags: ['#インテリア', '#コレクション部屋', '#JECCA診断'] },
     compat: [
       { role: '最高の相棒', name: 'キリンタイプ', emoji: '🦒' },
       { role: '良き理解者', name: 'コーギータイプ', emoji: '🐾' }
     ],
     accent: '#405850',
-    shareText: '【JCAT型】無言の美術館館長メインクーンタイプ🐈\n語らなくていい。並べた瞬間に、すべてが伝わる。\n静かに完璧なコレクターがここにいる。'
+    shareText: '無言の美術館館長メインクーンタイプ🐈\n語らなくていい。並べた瞬間に、すべてが伝わる。\n静かに完璧なコレクターがここにいる。'
   },
-  JCSN: {
+  ABBA: {
     name: '発信する教育者カメレオンタイプ',
     icon: '🦎',
     catchcopy: '「見て！この精密さを！」世界に届けずにはいられない。',
-    desc: 'あなたはペットの美しさを、一人で抱えておくことができないタイプです。カメレオンのように観察眼が鋭く、他の人が見落としているディテールに最初に気づく。あなたのコンテンツは教育的でありながらエモーショナルで、フォロワーに「見る目」を与えてくれます。\n\nJEKCAの職人的な造形美を最も理解し、最も伝えられるのは、あなたのような人です。',
-    axes: ['J — ペットオーナー', 'C — 本物志向型', 'S — 発信派', 'N — 共感型'],
+    desc: 'あなたはペットの美しさを、一人で抱えておくことができないタイプです。カメレオンのように観察眼が鋭く、他の人が見落としているディテールに最初に気づく。あなたのコンテンツは教育的でありながらエモーショナルで、フォロワーに「見る目」を与えてくれます。\n\nJECCAの職人的な造形美を最も理解し、最も伝えられるのは、あなたのような人です。',
+    axes: ['ペットオーナー', '本物志向型', '発信・投稿派', '共感・再現型'],
     product: { name: '爬虫類シリーズ（カメレオン）', sub: '繊細なスケールまで再現した希少モデル', emoji: '🦎', url: 'https://jekca-shop.com/collections/%E3%81%9D%E3%81%AE%E4%BB%96' },
-    post: { title: '「なぜJEKCAはリアルなのか解説」教育・比較動画', text: '爬虫類の本物写真と並べながら、JEKCAの造形の凄さを解説する教育系コンテンツ。知識の深さがコンテンツの差別化になる。', tags: ['#爬虫類好き', '#精密模型', '#JEKCA診断'] },
+    post: { title: '「なぜJECCAはリアルなのか解説」教育・比較動画', text: '爬虫類の本物写真と並べながら、JECCAの造形の凄さを解説する教育系コンテンツ。知識の深さがコンテンツの差別化になる。', tags: ['#爬虫類好き', '#精密模型', '#JECCA診断'] },
     compat: [
       { role: '最高の相棒', name: 'ビーグルタイプ', emoji: '🐶' },
       { role: '良き理解者', name: 'T・レックスタイプ', emoji: '🦖' }
     ],
     accent: '#3A8050',
-    shareText: '【JCSN型】発信する教育者カメレオンタイプ🦎\n「見て！この精密さを！」世界に届けずにはいられない。\n観察眼と発信力を持つタイプ。'
+    shareText: '発信する教育者カメレオンタイプ🦎\n「見て！この精密さを！」世界に届けずにはいられない。\n観察眼と発信力を持つタイプ。'
   },
-  JCST: {
+  ABBB: {
     name: '愛あるマニアのモルモットタイプ',
     icon: '🐹',
     catchcopy: '語り出したら止まらない。それは、深く愛しているから。',
-    desc: 'あなたの愛情は、知識の深さと比例しています。モルモットのように愛嬌がありながら、実はものすごい情報量を内側に持っている。マニアックな視点からの語りがじわじわとファンを獲得するタイプです。\n\nJEKCAの製造技術やデザインの背景を深掘りして、そのマニア知識を発信してみてください。きっと強烈なファンが生まれます。',
-    axes: ['J — ペットオーナー', 'C — 本物志向型', 'S — 発信派', 'T — 発見型'],
+    desc: 'あなたの愛情は、知識の深さと比例しています。モルモットのように愛嬌がありながら、実はものすごい情報量を内側に持っている。マニアックな視点からの語りがじわじわとファンを獲得するタイプです。\n\nJECCAの製造技術やデザインの背景を深掘りして、そのマニア知識を発信してみてください。きっと強烈なファンが生まれます。',
+    axes: ['ペットオーナー', '本物志向型', '発信・投稿派', '憧れ・発見型'],
     product: { name: '小動物シリーズ（モルモット）', sub: 'ANIMALシリーズ希少動物との組み合わせ', emoji: '🐹', url: 'https://jekca-shop.com/collections/%E3%81%9D%E3%81%AE%E4%BB%96' },
-    post: { title: '「知らなかったJEKCAの凄い仕組み3選」トリビア動画', text: '動物の生態知識とJEKCAの造形へのこだわりを組み合わせたトリビア・豆知識動画。深いところが刺さるマニア向けコンテンツ。', tags: ['#動物雑学', '#マニア', '#JEKCA診断'] },
+    post: { title: '「知らなかったJECCAの凄い仕組み3選」トリビア動画', text: '動物の生態知識とJECCAの造形へのこだわりを組み合わせたトリビア・豆知識動画。深いところが刺さるマニア向けコンテンツ。', tags: ['#動物雑学', '#マニア', '#JECCA診断'] },
     compat: [
       { role: '最高の相棒', name: 'クルマサカオウムタイプ', emoji: '🦜' },
       { role: '良き理解者', name: 'モアイタイプ', emoji: '🗿' }
     ],
     accent: '#8A6040',
-    shareText: '【JCST型】愛あるマニアのモルモットタイプ🐹\n語り出したら止まらない。それは、深く愛しているから。\n深い愛と知識を持つタイプ。'
+    shareText: '愛あるマニアのモルモットタイプ🐹\n語り出したら止まらない。それは、深く愛しているから。\n深い愛と知識を持つタイプ。'
   },
-  KEAN: {
+  BAAA: {
     name: '部屋でそっと寄り添うコアラタイプ',
     icon: '🐨',
     catchcopy: '飼えないけれど、心はずっと一緒にいる。',
-    desc: 'あなたは、実際には飼えない動物への純粋な愛情を、丁寧な形で手元に残すことを選んだ人です。コアラのように、必要なものだけに囲まれたゆったりとした空間で、お気に入りの子に「おはよう」と声をかける毎日がある。静かに癒されることが好きで、その空間を自分だけの幸せとして守りたいタイプ。\n\nJEKCAは、あなたが「飼いたかったけど飼えなかった」あの子を、永遠に手元に置く夢を叶えます。',
-    axes: ['K — 動物好き', 'E — 擬人化型', 'A — 飾る派', 'N — 共感型'],
+    desc: 'あなたは、実際には飼えない動物への純粋な愛情を、丁寧な形で手元に残すことを選んだ人です。コアラのように、必要なものだけに囲まれたゆったりとした空間で、お気に入りの子に「おはよう」と声をかける毎日がある。静かに癒されることが好きで、その空間を自分だけの幸せとして守りたいタイプ。\n\nJECCAは、あなたが「飼いたかったけど飼えなかった」あの子を、永遠に手元に置く夢を叶えます。',
+    axes: ['動物好き', '擬人化型', '飾る派', '共感・再現型'],
     product: { name: 'ANIMALシリーズ（コアラ）Sサイズ', sub: '部屋のどこにでも飾れるコンパクトモデル', emoji: '🐨', url: 'https://jekca-shop.com/collections/%E5%8B%95%E7%89%A9' },
-    post: { title: '「朝起きて最初に目が合う子」癒し系日常動画', text: '起き抜けにJEKCAに「おはよう」と声をかける瞬間の日常動画。癒し系・ひとり暮らし系アカウントに最もフィットする投稿スタイル。', tags: ['#癒し', '#インテリア', '#ひとり暮らし', '#JEKCA診断'] },
+    post: { title: '「朝起きて最初に目が合う子」癒し系日常動画', text: '起き抜けにJECCAに「おはよう」と声をかける瞬間の日常動画。癒し系・ひとり暮らし系アカウントに最もフィットする投稿スタイル。', tags: ['#癒し', '#インテリア', '#ひとり暮らし', '#JECCA診断'] },
     compat: [
       { role: '最高の相棒', name: '柴犬タイプ', emoji: '🐕' },
       { role: '良き理解者', name: 'ユニコーンタイプ', emoji: '🦄' }
     ],
     accent: '#8A9898',
-    shareText: '【KEAN型】部屋でそっと寄り添うコアラタイプ🐨\n飼えないけれど、心はずっと一緒にいる。\n静かに深く愛する癒し系タイプ。'
+    shareText: '部屋でそっと寄り添うコアラタイプ🐨\n飼えないけれど、心はずっと一緒にいる。\n静かに深く愛する癒し系タイプ。'
   },
-  KEAT: {
+  BAAB: {
     name: '夢の住人ユニコーンタイプ',
     icon: '🦄',
     catchcopy: '実在しない存在を愛せる人は、特別な魂の持ち主だと思う。',
-    desc: 'あなたの愛情は、現実の制約を超えます。「飼えるか飼えないか」よりも「美しいか、心が動くか」で選ぶ。ユニコーンのように実在しない存在にさえ深い愛を注げる人は、想像力と感受性が豊かな証拠です。現実と夢の境界線上で生きています。\n\nそんなあなたにとって、JEKCAは「夢の世界を自分の棚に飾る」唯一の方法です。',
-    axes: ['K — 動物好き', 'E — 擬人化型', 'A — 飾る派', 'T — 発見型'],
+    desc: 'あなたの愛情は、現実の制約を超えます。「飼えるか飼えないか」よりも「美しいか、心が動くか」で選ぶ。ユニコーンのように実在しない存在にさえ深い愛を注げる人は、想像力と感受性が豊かな証拠です。現実と夢の境界線上で生きています。\n\nそんなあなたにとって、JECCAは「夢の世界を自分の棚に飾る」唯一の方法です。',
+    axes: ['動物好き', '擬人化型', '飾る派', '憧れ・発見型'],
     product: { name: 'ファンタジーシリーズ（ユニコーン）', sub: '夢の世界をブロックで再現した幻獣モデル', emoji: '🦄', url: 'https://jekca-shop.com/collections/%E3%83%95%E3%82%A1%E3%83%B3%E3%82%BF%E3%82%B8%E3%83%BC' },
-    post: { title: '「魔法みたいな瞬間」ファンタジー演出動画', text: 'ムーディーな照明とBGMで幻想的な世界観を演出。「現実とファンタジーの境界線」をテーマにしたアート系コンテンツが刺さる。', tags: ['#ファンタジー', '#幻獣', '#夢の世界', '#JEKCA診断'] },
+    post: { title: '「魔法みたいな瞬間」ファンタジー演出動画', text: 'ムーディーな照明とBGMで幻想的な世界観を演出。「現実とファンタジーの境界線」をテーマにしたアート系コンテンツが刺さる。', tags: ['#ファンタジー', '#幻獣', '#夢の世界', '#JECCA診断'] },
     compat: [
       { role: '最高の相棒', name: 'コアラタイプ', emoji: '🐨' },
       { role: '良き理解者', name: 'ブロッキーライオンタイプ', emoji: '🦁' }
     ],
     accent: '#8060A8',
-    shareText: '【KEAT型】夢の住人ユニコーンタイプ🦄\n実在しない存在を愛せる人は、特別な魂の持ち主だと思う。\n夢と現実の境界線を生きるタイプ。'
+    shareText: '夢の住人ユニコーンタイプ🦄\n実在しない存在を愛せる人は、特別な魂の持ち主だと思う。\n夢と現実の境界線を生きるタイプ。'
   },
-  KESN: {
+  BABA: {
     name: 'マイペース発信者ナマケモノタイプ',
     icon: '🦥',
     catchcopy: 'ゆっくりでいい。でも、ちゃんと見ていてほしい。',
-    desc: 'あなたは急がない。でも、止まっているわけではない。ナマケモノのように一つ一つの動作は丁寧で、それ自体に意味があります。「見てほしい」という気持ちは確かにあって、でも媚びたくはない。そのさじ加減が絶妙で、静かに根強いファンを獲得するタイプです。\n\nJEKCAの組み立て過程をゆっくり記録していくコンテンツは、あなたの発信スタイルと完璧に合います。',
-    axes: ['K — 動物好き', 'E — 擬人化型', 'S — 発信派', 'N — 共感型'],
+    desc: 'あなたは急がない。でも、止まっているわけではない。ナマケモノのように一つ一つの動作は丁寧で、それ自体に意味があります。「見てほしい」という気持ちは確かにあって、でも媚びたくはない。そのさじ加減が絶妙で、静かに根強いファンを獲得するタイプです。\n\nJECCAの組み立て過程をゆっくり記録していくコンテンツは、あなたの発信スタイルと完璧に合います。',
+    axes: ['動物好き', '擬人化型', '発信・投稿派', '共感・再現型'],
     product: { name: 'ANIMALシリーズ（ナマケモノ）', sub: 'のんびりとした雰囲気のリラックス系モデル', emoji: '🦥', url: 'https://jekca-shop.com/collections/%E5%8B%95%E7%89%A9' },
-    post: { title: '「ゆっくり組み立ててみた」タイムラプス・制作過程動画', text: 'JEKCAの組み立て過程をタイムラプスや通常速度で記録。BGMだけのASMR的な静かな動画が意外と伸びる。じっくり見る系コンテンツ。', tags: ['#組み立て', '#制作過程', '#ASMR', '#JEKCA診断'] },
+    post: { title: '「ゆっくり組み立ててみた」タイムラプス・制作過程動画', text: 'JECCAの組み立て過程をタイムラプスや通常速度で記録。BGMだけのASMR的な静かな動画が意外と伸びる。じっくり見る系コンテンツ。', tags: ['#組み立て', '#制作過程', '#ASMR', '#JECCA診断'] },
     compat: [
       { role: '最高の相棒', name: 'ビーグルタイプ', emoji: '🐶' },
       { role: '良き理解者', name: 'コアラタイプ', emoji: '🐨' }
     ],
     accent: '#6A8040',
-    shareText: '【KESN型】マイペース発信者ナマケモノタイプ🦥\nゆっくりでいい。でも、ちゃんと見ていてほしい。\n焦らず自分のペースで発信するタイプ。'
+    shareText: 'マイペース発信者ナマケモノタイプ🦥\nゆっくりでいい。でも、ちゃんと見ていてほしい。\n焦らず自分のペースで発信するタイプ。'
   },
-  KEST: {
+  BABB: {
     name: '熱量系インフルエンサーのライオンタイプ',
     icon: '🦁',
     catchcopy: '憧れは語ってこそ。この熱さを止める必要はない。',
-    desc: 'あなたの熱量は、見ている人を動かします。ブロッキーライオンのように堂々としたビジュアルと、圧倒的な存在感。TikTokライブが最も輝く場所で、フォロワーを巻き込みながら盛り上げていく。「テンション高すぎ」と言われることがあるかもしれないけれど、それはあなたの愛が本物である証拠です。\n\nJEKCAの商品を紹介するなら、あなたのライブが最強です。',
-    axes: ['K — 動物好き', 'E — 擬人化型', 'S — 発信派', 'T — 発見型'],
+    desc: 'あなたの熱量は、見ている人を動かします。ブロッキーライオンのように堂々としたビジュアルと、圧倒的な存在感。TikTokライブが最も輝く場所で、フォロワーを巻き込みながら盛り上げていく。「テンション高すぎ」と言われることがあるかもしれないけれど、それはあなたの愛が本物である証拠です。\n\nJECCAの商品を紹介するなら、あなたのライブが最強です。',
+    axes: ['動物好き', '擬人化型', '発信・投稿派', '憧れ・発見型'],
     product: { name: 'ブロッキーアニマルシリーズ（ライオン）', sub: '存在感抜群のビッグサイズモデル', emoji: '🦁', url: 'https://jekca-shop.com/collections/%E5%8B%95%E7%89%A9' },
-    post: { title: 'ライブ・リアクション動画でTikTok LIVEをフル活用', text: 'TikTokライブでJEKCAを紹介しながら、視聴者のコメントに熱くリアクション！ライブのアーカイブ切り抜きがそのままバズりやすいコンテンツになる。', tags: ['#ライオン', '#推し活', '#TikTokLIVE', '#JEKCA診断'] },
+    post: { title: 'ライブ・リアクション動画でTikTok LIVEをフル活用', text: 'TikTokライブでJECCAを紹介しながら、視聴者のコメントに熱くリアクション！ライブのアーカイブ切り抜きがそのままバズりやすいコンテンツになる。', tags: ['#ライオン', '#推し活', '#TikTokLIVE', '#JECCA診断'] },
     compat: [
       { role: '最高の相棒', name: 'クルマサカオウムタイプ', emoji: '🦜' },
       { role: '良き理解者', name: 'T・レックスタイプ', emoji: '🦖' }
     ],
     accent: '#B88020',
-    shareText: '【KEST型】熱量系インフルエンサーのライオンタイプ🦁\n憧れは語ってこそ。この熱さを止める必要はない。\nTikTokライブで輝くタイプ！'
+    shareText: '熱量系インフルエンサーのライオンタイプ🦁\n憧れは語ってこそ。この熱さを止める必要はない。\nTikTokライブで輝くタイプ！'
   },
-  KCAN: {
+  BBAA: {
     name: '静かで鋭い審美眼チータータイプ',
     icon: '🐆',
     catchcopy: '本物の美しさと速さに惚れた目は、偽物を一瞬で見抜く。',
-    desc: 'あなたには、多くの人が見落とすものが見えます。チーターの体の流線型美、スポットの配置——そういった「設計の美しさ」に気づいたとき、静かに、深く心が動く。発信するとき、そのシャープな視点が読む人を唸らせます。\n\nJEKCAの精巧な造形に、あなたの審美眼は必ず反応するはずです。',
-    axes: ['K — 動物好き', 'C — 本物志向型', 'A — 飾る派', 'N — 共感型'],
+    desc: 'あなたには、多くの人が見落とすものが見えます。チーターの体の流線型美、スポットの配置——そういった「設計の美しさ」に気づいたとき、静かに、深く心が動く。発信するとき、そのシャープな視点が読む人を唸らせます。\n\nJECCAの精巧な造形に、あなたの審美眼は必ず反応するはずです。',
+    axes: ['動物好き', '本物志向型', '飾る派', '共感・再現型'],
     product: { name: 'ANIMALシリーズ（チーター）', sub: '野性の美しさを精密に再現したモデル', emoji: '🐆', url: 'https://jekca-shop.com/collections/%E5%8B%95%E7%89%A9' },
-    post: { title: '「なぜこのJEKCAはリアルなのか」審美眼を見せる動画', text: 'チーターの実写写真とJEKCAを並べ、「なぜリアルなのか」を3つのポイントで解説。鑑定士系・解説系コンテンツで差別化。', tags: ['#チーター', '#精密模型', '#動物好き', '#JEKCA診断'] },
+    post: { title: '「なぜこのJECCAはリアルなのか」審美眼を見せる動画', text: 'チーターの実写写真とJECCAを並べ、「なぜリアルなのか」を3つのポイントで解説。鑑定士系・解説系コンテンツで差別化。', tags: ['#チーター', '#精密模型', '#動物好き', '#JECCA診断'] },
     compat: [
       { role: '最高の相棒', name: 'ブリティッシュ・ショートヘアタイプ', emoji: '🐱' },
       { role: '良き理解者', name: 'モアイタイプ', emoji: '🗿' }
     ],
     accent: '#B08030',
-    shareText: '【KCAN型】静かで鋭い審美眼チータータイプ🐆\n本物の美しさに惚れた目は、偽物を一瞬で見抜く。\n鋭い審美眼を持つコレクター。'
+    shareText: '静かで鋭い審美眼チータータイプ🐆\n本物の美しさに惚れた目は、偽物を一瞬で見抜く。\n鋭い審美眼を持つコレクター。'
   },
-  KCAT: {
+  BBAB: {
     name: '孤独な視点の高いキリンタイプ',
     icon: '🦒',
     catchcopy: '誰より高い場所から世界を見ている、静かなコレクター。',
-    desc: 'あなたのコレクションへの目線は、どこか俯瞰的です。「なぜこれが美しいか」を説明することにあまり興味がなく、自分の世界観を完成させることに集中しています。「本当に分かる人」とだけ繋がりたいという高い基準がある。\n\nJEKCAで、あなただけのキュレーションドギャラリーを作ってください。きっと、分かる人には伝わります。',
-    axes: ['K — 動物好き', 'C — 本物志向型', 'A — 飾る派', 'T — 発見型'],
+    desc: 'あなたのコレクションへの目線は、どこか俯瞰的です。「なぜこれが美しいか」を説明することにあまり興味がなく、自分の世界観を完成させることに集中しています。「本当に分かる人」とだけ繋がりたいという高い基準がある。\n\nJECCAで、あなただけのキュレーションドギャラリーを作ってください。きっと、分かる人には伝わります。',
+    axes: ['動物好き', '本物志向型', '飾る派', '憧れ・発見型'],
     product: { name: 'ANIMALシリーズ（キリン）', sub: '棚の一番高い場所に一体だけ飾る存在感', emoji: '🦒', url: 'https://jekca-shop.com/collections/%E5%8B%95%E7%89%A9' },
-    post: { title: '「この部屋の主はどんな人？」世界観コンテンツ', text: '部屋のインテリアとJEKCAを組み合わせた「世界観紹介」コンテンツ。多くを語らずにコレクションを見せるだけで、独自の世界観が伝わる。', tags: ['#インテリア', '#コレクター', '#世界観', '#JEKCA診断'] },
+    post: { title: '「この部屋の主はどんな人？」世界観コンテンツ', text: '部屋のインテリアとJECCAを組み合わせた「世界観紹介」コンテンツ。多くを語らずにコレクションを見せるだけで、独自の世界観が伝わる。', tags: ['#インテリア', '#コレクター', '#世界観', '#JECCA診断'] },
     compat: [
       { role: '最高の相棒', name: 'メインクーンタイプ', emoji: '🐈' },
       { role: '良き理解者', name: 'チータータイプ', emoji: '🐆' }
     ],
     accent: '#A07828',
-    shareText: '【KCAT型】孤独な視点の高いキリンタイプ🦒\n誰より高い場所から世界を見ている、静かなコレクター。\n自分だけの世界観を持つタイプ。'
+    shareText: '孤独な視点の高いキリンタイプ🦒\n誰より高い場所から世界を見ている、静かなコレクター。\n自分だけの世界観を持つタイプ。'
   },
-  KCSN: {
+  BBBA: {
     name: '衝動型発信者T・レックスタイプ',
     icon: '🦖',
     catchcopy: 'この圧倒的な存在感を黙って見ていられるわけがない！',
-    desc: 'あなたは「いい！」と思った瞬間、体が動くタイプです。T・レックスのように、その場にいるだけで周囲の空気が変わる。熟考より行動。その無邪気さと熱量が、フォロワーに伝染していきます。\n\nJEKCAの恐竜シリーズの最大サイズを手に入れた瞬間、あなたのリアクションは最高のコンテンツになります。',
-    axes: ['K — 動物好き', 'C — 本物志向型', 'S — 発信派', 'N — 共感型'],
+    desc: 'あなたは「いい！」と思った瞬間、体が動くタイプです。T・レックスのように、その場にいるだけで周囲の空気が変わる。熟考より行動。その無邪気さと熱量が、フォロワーに伝染していきます。\n\nJECCAの恐竜シリーズの最大サイズを手に入れた瞬間、あなたのリアクションは最高のコンテンツになります。',
+    axes: ['動物好き', '本物志向型', '発信・投稿派', '共感・再現型'],
     product: { name: '恐竜シリーズ（T・レックス）最大サイズ', sub: '圧倒的な迫力と存在感の最大スペックモデル', emoji: '🦖', url: 'https://jekca-shop.com/collections/%E6%81%90%E7%AB%9C' },
-    post: { title: '「届いた！でかすぎ！」開封・組み立てリアクション動画', text: 'JEKCAの大型モデルが届いた瞬間のリアクション動画！箱の大きさ→開封→サイズ比較→組み立て完成、の流れで衝動的な感動を伝える。', tags: ['#恐竜', '#開封動画', '#組み立て', '#JEKCA診断'] },
+    post: { title: '「届いた！でかすぎ！」開封・組み立てリアクション動画', text: 'JECCAの大型モデルが届いた瞬間のリアクション動画！箱の大きさ→開封→サイズ比較→組み立て完成、の流れで衝動的な感動を伝える。', tags: ['#恐竜', '#開封動画', '#組み立て', '#JECCA診断'] },
     compat: [
       { role: '最高の相棒', name: 'ブロッキーライオンタイプ', emoji: '🦁' },
       { role: '良き理解者', name: 'カメレオンタイプ', emoji: '🦎' }
     ],
     accent: '#286040',
-    shareText: '【KCSN型】衝動型発信者T・レックスタイプ🦖\nこの圧倒的な存在感を黙って見ていられるわけがない！\n熱量がそのままコンテンツになるタイプ。'
+    shareText: '衝動型発信者T・レックスタイプ🦖\nこの圧倒的な存在感を黙って見ていられるわけがない！\n熱量がそのままコンテンツになるタイプ。'
   },
-  KCST: {
+  BBBB: {
     name: '発信し続ける哲学者モアイタイプ',
     icon: '🗿',
     catchcopy: '誰にも理解されなくていい。それでも、形にしなければ気が済まない。',
-    desc: 'あなたは誰かのために発信しているわけではありません。自分の内側にあるものを「形にすること」が目的であり、それが結果的に誰かに届くなら、それはおまけです。モアイのように、長い時間をかけて完成した存在が持つ圧倒的な説得力。\n\nあなたのコンテンツには、軽く消費できない「重さ」があって、それが真のファンを生み出します。JEKCAはそんなあなたの内面を可視化する道具になれる。',
-    axes: ['K — 動物好き', 'C — 本物志向型', 'S — 発信派', 'T — 発見型'],
+    desc: 'あなたは誰かのために発信しているわけではありません。自分の内側にあるものを「形にすること」が目的であり、それが結果的に誰かに届くなら、それはおまけです。モアイのように、長い時間をかけて完成した存在が持つ圧倒的な説得力。\n\nあなたのコンテンツには、軽く消費できない「重さ」があって、それが真のファンを生み出します。JECCAはそんなあなたの内面を可視化する道具になれる。',
+    axes: ['動物好き', '本物志向型', '発信・投稿派', '憧れ・発見型'],
     product: { name: '建築・古代遺跡シリーズ（モアイ像）', sub: '時を超えた存在感を持つ唯一無二のモデル', emoji: '🗿', url: 'https://jekca-shop.com/collections/%E5%BB%BA%E7%AF%89%E3%81%A8%E5%8F%A4%E4%BB%A3%E9%81%BA%E8%B7%A1' },
-    post: { title: '「深夜投稿・哲学系キャプション動画」内省的コンテンツ', text: '深夜に撮影した内省的な動画とJEKCAを組み合わせたアート系コンテンツ。多くを語らない重厚なキャプションが真のファンを引き寄せる。', tags: ['#哲学', '#深夜投稿', '#コレクター哲学', '#JEKCA診断'] },
+    post: { title: '「深夜投稿・哲学系キャプション動画」内省的コンテンツ', text: '深夜に撮影した内省的な動画とJECCAを組み合わせたアート系コンテンツ。多くを語らない重厚なキャプションが真のファンを引き寄せる。', tags: ['#哲学', '#深夜投稿', '#コレクター哲学', '#JECCA診断'] },
     compat: [
       { role: '最高の相棒', name: 'モルモットタイプ', emoji: '🐹' },
       { role: '良き理解者', name: 'チータータイプ', emoji: '🐆' }
     ],
     accent: '#706050',
-    shareText: '【KCST型】発信し続ける哲学者モアイタイプ🗿\n誰にも理解されなくていい。それでも、形にしなければ気が済まない。\n独自の世界を持つ唯一無二のタイプ。'
+    shareText: '発信し続ける哲学者モアイタイプ🗿\n誰にも理解されなくていい。それでも、形にしなければ気が済まない。\n独自の世界を持つ唯一無二のタイプ。'
   }
 };
 
@@ -1397,7 +1357,6 @@ function showScreen(id) {
 function startDiagnosis() {
   answers = [];
   currentQ = 0;
-  _trackSessionStart();
   showScreen('question');
   renderQuestion();
 }
@@ -1410,8 +1369,8 @@ function renderQuestion() {
   const q = QUESTIONS[currentQ];
 
   // ヘッダー
-  document.getElementById('q-number-text').textContent = `Q${q.id} / 4`;
-  const pct = (currentQ / 4) * 100;
+  document.getElementById('q-number-text').textContent = `Q${q.id} / 8`;
+  const pct = (currentQ / 8) * 100;
   document.getElementById('progress-fill').style.width = pct + '%';
 
   // 質問文
@@ -1436,17 +1395,12 @@ function selectChoice(label, cardEl) {
   // 選択アニメーション
   cardEl.classList.add('selected');
 
-  // 回答をトラッキング
-  const q = QUESTIONS[currentQ];
-  const choiceData = q.choices.find(c => c.label === label);
-  _trackAnswer(q.id, q.text, label, choiceData ? choiceData.text : '');
-
   // 0.3秒後に次へ
   setTimeout(() => {
     answers.push(label);
     currentQ++;
 
-    if (currentQ >= 4) {
+    if (currentQ >= 8) {
       showLoading();
     } else {
       renderQuestion();
@@ -1490,28 +1444,28 @@ function showLoading() {
    RESULT LOGIC
    ============================================ */
 function determineType(ans) {
-  const axisA = ans[0];
-  const axisB = ans[1];
-  const axisC = ans[2];
-  const axisD = ans[3];
+  function tiebreak(q1, q2) {
+    return q1 === q2 ? q1 : q2;
+  }
+
+  const axisA = tiebreak(ans[0], ans[1]);
+  const axisB = tiebreak(ans[2], ans[3]);
+  const axisC = tiebreak(ans[4], ans[5]);
+  const axisD = tiebreak(ans[6], ans[7]);
 
   return axisA + axisB + axisC + axisD;
 }
 
 function showResult() {
   const typeCode = determineType(answers);
-  resultType = TYPES[typeCode] || TYPES['JEAN'];
-
-  // 診断結果をトラッキング
-  _trackResult(typeCode, resultType.name, resultType.icon);
+  resultType = TYPES[typeCode] || TYPES['AAAA'];
 
   // アクセントカラー設定
   document.documentElement.style.setProperty('--accent', resultType.accent);
 
   // ヒーロー
   document.getElementById('result-hero').style.background = resultType.accent;
-  document.getElementById('result-label').textContent = typeCode + '型';
-  document.getElementById('result-icon').src = 'images/' + typeCode + '.png';
+  document.getElementById('result-icon').textContent = resultType.icon;
   document.getElementById('result-type-name').textContent = resultType.name;
   document.getElementById('result-catchcopy').textContent = resultType.catchcopy;
 
@@ -1528,7 +1482,7 @@ function showResult() {
   document.getElementById('result-product-emoji').textContent = resultType.product.emoji;
   document.getElementById('result-product-name').textContent = resultType.product.name;
   document.getElementById('result-product-sub').textContent = resultType.product.sub;
-  document.getElementById('result-product-link').href = 'https://vt.tiktok.com/ZS9dMB8TdXd69-OHUjV/';
+  document.getElementById('result-product-link').href = resultType.product.url;
   document.getElementById('result-product-link').style.background = resultType.accent;
 
   // 投稿スタイル
@@ -1559,22 +1513,13 @@ function showResult() {
    ============================================ */
 function buildShareText() {
   if (!resultType) return '';
-  return `${resultType.shareText}\nあなたは何型？→ ${DIAGNOSE_URL}\n#JEKA診断 #JEKCA診断 #ジェッカブロック`;
+  return `${resultType.shareText}\nあなたは何タイプ？→ ${DIAGNOSE_URL}\n#JECCA診断 #ジェッカブロック`;
 }
 
-function shareInstagram() {
-  const text = buildShareText();
-  if (navigator.share) {
-    navigator.share({
-      title: 'ANIMATCH診断結果',
-      text: text,
-      url: DIAGNOSE_URL
-    }).catch(() => {});
-  } else {
-    navigator.clipboard.writeText(text + '\n' + DIAGNOSE_URL).then(() => {
-      alert('テキストをコピーしました！\nInstagramアプリを開いてストーリーや投稿に貼り付けてください📸');
-    });
-  }
+function shareX() {
+  const text = encodeURIComponent(buildShareText());
+  const url = `https://twitter.com/intent/tweet?text=${text}`;
+  window.open(url, '_blank', 'noopener,noreferrer');
 }
 
 function shareLine() {
