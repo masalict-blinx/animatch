@@ -640,6 +640,7 @@
       font-size: 15px;
       line-height: 1.8;
       color: var(--gray-900);
+      white-space: pre-line;
     }
 
     /* シェアボタン群 */
@@ -1422,12 +1423,17 @@ function renderQuestion() {
   });
 }
 
+let _selecting = false;
 function selectChoice(label, cardEl) {
+  if (_selecting) return;
+  _selecting = true;
+
   // 選択アニメーション
   cardEl.classList.add('selected');
 
   // 0.3秒後に次へ
   setTimeout(() => {
+    _selecting = false;
     answers.push(label);
     currentQ++;
 
